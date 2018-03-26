@@ -13,10 +13,10 @@ router.get('/', function (req, res, next) {
   const end_date = moment(req.query.end_date)
 
   if (!start_date.isValid() || !end_date.isValid() || !company) {
-    // the params are invalid
+    // the params are invalid, need to respond with invalid field
     res.json({status: 400, message: 'bad request'})
   } else {
-    fetch(`https://graph.facebook.com/${company}/posts?since=${start_date.unix()}&until=${end_date.unix()}&access_token=${access_token}`)
+    fetch(`https://graph.facebook.com/${company}?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`)
     .then(function (response) {
       if (response.ok) {
         response.json().then(json => {
