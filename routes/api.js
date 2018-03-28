@@ -29,16 +29,16 @@ router.get('/', function (req, res, next) {
         return fetch(`https://graph.facebook.com/v2.12/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
       }
     }).then(response => {
-      if (response != undefined) {
+      if (response) {
         response.json().then(data => {
           if (data.data[0]) {
-            var companyId = data.data[0].id
+            const companyId = data.data[0].id
             return fetch(graphAPIString(companyId, start_date, end_date, statistics))
           } else {
             res.json(responseFormatter(req, response))
           }
         }).then(response => {
-          if (response != undefined) {
+          if (response) {
             response.json().then(data => {
               res.json(responseFormatter(req, response, start_time, data))
             })
