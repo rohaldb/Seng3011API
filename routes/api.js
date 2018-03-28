@@ -9,22 +9,27 @@ const fb_version = 'v2.6'
 /*
  * Post information route for a company post.
  */
-router.get('/:comapny/facebook/:post', function (req, res, next) {
+router.get('/:comapny/facebook/post/', function (req, res, next) {
   // start timer
   const start_time = new Date()
-  const post = req.params.post
+  const post = req.query.id
 
-  fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
-  .then(function (response) {
-    if (response.ok) {
-      response.json().then(data => {
-        res.json(responseFormatter(req, response, start_time, formatPostInfo(data)))
-      })
-    } else {
-      res.json(responseFormatter(req, response, start_time))
-    }
-  })
-  .catch(error => console.error(error))
+  if (!post) {
+    //check for missing id parameter
+    res.json({status: 400, message: 'Missing parameter: `id`'})
+  } else {
+    fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(data => {
+          res.json(responseFormatter(req, response, start_time, formatPostInfo(data)))
+        })
+      } else {
+        res.json(responseFormatter(req, response, start_time))
+      }
+    })
+    .catch(error => console.error(error))
+  }
 })
 
 /*
