@@ -4,6 +4,7 @@ var moment = require('moment')
 var router = express.Router()
 
 const access_token = 'EAACEdEose0cBAK3sOAHEZAxpM0hbdymGx7woswCFOyzJ8DJEpC3imOH8IwZB4df0vDM7LrZCkePq3FG7AHFlMItGAMFSPnJlxjJQnlXs8flxcEk6vI2ACCLB30ZCq7kZCiXahvJmRAUFFyoOS5G3AM8ZCFZCObjGH7OquC9GtQBGcWO77BVZBpTVhIIAKKtqP6xTZA3MlIwhaDgZDZD'
+const fb_version = 'v2.6'
 
 /*
  * Post information route for a company post.
@@ -13,7 +14,7 @@ router.get('/:comapny/facebook/:post', function (req, res, next) {
   const start_time = new Date()
   const post = req.params.post
 
-  fetch(`https://graph.facebook.com/v2.6/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
+  fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
   .then(function (response) {
     if (response.ok) {
       response.json().then(data => {
@@ -57,7 +58,7 @@ router.get('/:company/facebook/', function (req, res, next) {
           res.json(responseFormatter(req, response, start_time, data))
         })
       } else {
-        return fetch(`https://graph.facebook.com/v2.6/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
+        return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
       }
     }).then(response => {
       if (response) {
@@ -84,7 +85,7 @@ router.get('/:company/facebook/', function (req, res, next) {
  * Returns URL to pass to Facebook Graph API for company info.
  */
 const graphAPIString = (company, start_date, end_date, statistics) => {
-  return `https://graph.facebook.com/v2.6/${company}?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
+  return `https://graph.facebook.com/${fb_version}/${company}?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
 }
 
 /*
