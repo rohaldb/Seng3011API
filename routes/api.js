@@ -4,46 +4,38 @@ var moment = require('moment')
 var sqlite3 = require('sqlite3').verbose()
 var router = express.Router()
 
-const access_token = 'EAACEdEose0cBACl0eSqZAwcUGJip7A3QCYIW63BooW3T6gCv8PCCsKxVOasp1MFB93Hyde4YC2eaL1SEplhUy1MYAerzNDGYSJ8C5yP5esEEpeZAMcK2ovT2hQD4IMZAWZAisBZCVZCqZBJAZB2rNudp0CpXGkMeFBgwT5nfdSel7YDAxiesKPAmBdEmcVO78vEZD'
+const access_token = 'EAACEdEose0cBACz2JgeNU3V8CBuPZBSCbHo3Gnw6Jnm8GGxFNW6QbphiwZCZAlST18826JqzBhUKQCT4Dstro5BryFYjYpP1FL17ZCLlZCj3uFsxWqc37CwqhLTDJwtkDWAmoGTBdXGBQvAUKe1Yq7vMHs4VpyLUzHs9Gvez3GCKXa2n9tntQFWZCBM1hQh1XFuZCUS6XJt5QZDZD'
 const fb_version = 'v2.6'
+const start_time = new Date()
 
 /*
  * Post information route for a company post.
  */
 router.get('/post/:id', function (req, res, next) {
   // start timer
-  const start_time = new Date()
   const post = req.params.id
-  const statistics = req.query.statistics
+  let statistics = req.query.statistics ? req.query.statistics : 'id, type, message, created_time, likes'
 
-  if (!post) {
-    // check for missing id parameter
-    res.json({status: 400, status_text: 'Missing parameter: `id`'})
-  } else if (!statistics) {
-    // check for missing stats parameter
-    res.json({status: 400, status_text: 'Missing parameter: `statistics`'})
-  } else {
-    fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=${statistics}&access_token=${access_token}`)
-    .then(function (response) {
-      // console.log(response)
-      if (response.ok) {
-        response.json().then(data => {
-          if (data.error) {
-            res.json({status: 400, status_text: data.error.message})
-          } else {
-            res.json(responseFormatter(req, response, start_time, data))
-          }
-        })
-      } else {
-        response.json().then(data => {
-          if (data.error) {
-            res.json({status: 400, status_text: data.error.message})
-          }
-        })
-      }
-    })
-    .catch(error => console.error(error))
-  }
+  fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=${statistics}&access_token=${access_token}`)
+  .then(function (response) {
+    // console.log(response)
+    if (response.ok) {
+      response.json().then(data => {
+        if (data.error) {
+          res.json(failureResponseFormatter(req, 400, data.error.message))
+        } else {
+          res.json(successResponseFormatter(req, response, data))
+        }
+      })
+    } else {
+      response.json().then(data => {
+        if (data.error) {
+          res.json(failureResponseFormatter(req, 400, data.error.message))
+        }
+      })
+    }
+  })
+  .catch(error => console.error(error))
 })
 
 /*
@@ -51,8 +43,9 @@ router.get('/post/:id', function (req, res, next) {
  */
 router.get('/:company', function (req, res, next) {
      // start timer
-  const start_time = new Date()
-  const statistics = req.query.statistics
+
+  const statistics = req.query.statistics ? req.query.statistics : 'id, name, website, description, category, fan_count, posts'
+
   const start_date = moment(req.query.start_date)
   const end_date = moment(req.query.end_date)
 
@@ -67,16 +60,16 @@ router.get('/:company', function (req, res, next) {
 
     if (!start_date.isValid() || !end_date.isValid()) {
       // check for valid date parameters
-      res.json({status: 400, status_text: 'Invalid date parameters'})
+      res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
     } else if (!statistics) {
       // check for missing stats parameter
-      res.json({status: 400, status_text: 'Missing parameter: `statistics`'})
+      res.json(failureResponseFormatter(req, 400, 'Missing parameter: `statistics`'))
     } else {
       fetch(graphAPIString(company, start_date, end_date, statistics))
        .then(response => {
          if (response.ok) {
            response.json().then(data => {
-             res.json(responseFormatter(req, response, start_time, data))
+             res.json(successResponseFormatter(req, response, data))
            })
          } else {
            return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
@@ -88,15 +81,15 @@ router.get('/:company', function (req, res, next) {
                const companyId = data.data[0].id
                return fetch(graphAPIString(companyId, start_date, end_date, statistics))
              } else {
-               res.json(responseFormatter(req, response))
+               res.json(successResponseFormatter(req, response))
              }
            }).then(response => {
              if (response) {
                response.json().then(data => {
                  if (data.error) {
-                   res.json({status: 400, status_text: data.error.message})
+                   res.json(failureResponseFormatter(req, 400, data.error.message))
                  } else {
-                   res.json(responseFormatter(req, response, start_time, data))
+                   res.json(successResponseFormatter(req, response, data))
                  }
                })
              }
@@ -105,7 +98,6 @@ router.get('/:company', function (req, res, next) {
        }).catch(error => console.error(error))
     }
   })
-  console.log('hi ben')
 })
 
 /*
@@ -118,18 +110,29 @@ const graphAPIString = (company, start_date, end_date, statistics) => {
 /*
  * Returns response JSON containing result data and metadata.
  */
-const responseFormatter = (req, api_response, start_time, api_data) => {
-  const end_time = new Date()
+const successResponseFormatter = (req, api_response, api_data) => {
+  const metadata = metaDataGen(req, api_response.status, api_response.statusText, api_data)
   return {
     data: api_data,
+    ...metadata
+  }
+}
+
+failureResponseFormatter = (req, response_code, status_text) => {
+  return metaDataGen(req, response_code, status_text)
+}
+
+const metaDataGen = (req, response_code, status_text, api_data = null) => {
+  const end_time = new Date()
+  return {
     dev_team: 'Team Unassigned',
     version: '1.0.0',
     start_time,
     end_time,
     time_elapsed: end_time - start_time,
     params: req.query,
-    status: api_response.status,
-    status_text: api_response.statusText
+    status: response_code,
+    status_text: status_text
   }
 }
 
