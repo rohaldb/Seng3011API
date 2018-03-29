@@ -1,16 +1,17 @@
-var fetch = require('isomorphic-fetch')
-var express = require('express')
-var moment = require('moment')
-var sqlite3 = require('sqlite3').verbose()
-var router = express.Router()
+var fetch = require('isomorphic-fetch');
+var express = require('express');
+var moment = require('moment');
+var sqlite3 = require('sqlite3').verbose();
+var router = express.Router();
+var cache = require('express-redis-cache')();
 
-const access_token = 'EAACEdEose0cBACl0eSqZAwcUGJip7A3QCYIW63BooW3T6gCv8PCCsKxVOasp1MFB93Hyde4YC2eaL1SEplhUy1MYAerzNDGYSJ8C5yP5esEEpeZAMcK2ovT2hQD4IMZAWZAisBZCVZCqZBJAZB2rNudp0CpXGkMeFBgwT5nfdSel7YDAxiesKPAmBdEmcVO78vEZD'
-const fb_version = 'v2.6'
+const access_token = 'EAACEdEose0cBACl0eSqZAwcUGJip7A3QCYIW63BooW3T6gCv8PCCsKxVOasp1MFB93Hyde4YC2eaL1SEplhUy1MYAerzNDGYSJ8C5yP5esEEpeZAMcK2ovT2hQD4IMZAWZAisBZCVZCqZBJAZB2rNudp0CpXGkMeFBgwT5nfdSel7YDAxiesKPAmBdEmcVO78vEZD';
+const fb_version = 'v2.6';
 
 /*
  * Post information route for a company post.
  */
-router.get('/post/:id', function (req, res, next) {
+router.get('/post/:id', cache.route(), function (req, res, next) {
   // start timer
   const start_time = new Date()
   const post = req.params.id
@@ -49,7 +50,7 @@ router.get('/post/:id', function (req, res, next) {
 /*
  * Facebook page information route for a company.
  */
-router.get('/:company', function (req, res, next) {
+router.get('/:company', cache.route(), function (req, res, next) {
      // start timer
   const start_time = new Date()
   const statistics = req.query.statistics
