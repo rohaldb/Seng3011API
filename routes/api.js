@@ -119,7 +119,11 @@ const successResponseFormatter = (req, api_response, api_data) => {
 }
 
 failureResponseFormatter = (req, response_code, status_text) => {
-  return metaDataGen(req, response_code, status_text)
+  const metadata = metaDataGen(req, response_code, status_text)
+  return {
+    data: [],
+    ...metadata
+  }
 }
 
 const metaDataGen = (req, response_code, status_text, api_data = null) => {
