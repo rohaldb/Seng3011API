@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "redis-4.0.9/src/redis-server & node ./bin/www",
+    "start": "redis-server & node ./bin/www",
     "prod-heroku": "node ./bin/www"
   },
   "dependencies": {
