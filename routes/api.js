@@ -96,9 +96,7 @@ router.get('/:company', function (req, res, next) {
                  if (data.error) {
                    res.json({status: 400, status_text: data.error.message})
                  } else {
-                   console.log('hi ben111')
                    res.json(responseFormatter(req, response, start_time, data))
-                   console.log('hi ben')
                  }
                })
              }
