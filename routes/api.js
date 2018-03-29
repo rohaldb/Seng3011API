@@ -13,19 +13,32 @@ router.get('/post/:id', function (req, res, next) {
   // start timer
   const start_time = new Date()
   const post = req.params.id
+  const statistics = req.query.statistics
 
   if (!post) {
     // check for missing id parameter
     res.json({status: 400, message: 'Missing parameter: `id`'})
+  } else if (!statistics) {
+    // check for missing stats parameter
+    res.json({status: 400, message: 'Missing parameter: `statistics`'})
   } else {
-    fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
+    fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=${statistics}&access_token=${access_token}`)
     .then(function (response) {
+      // console.log(response)
       if (response.ok) {
         response.json().then(data => {
-          res.json(responseFormatter(req, response, start_time, formatPostInfo(data)))
+          if (data.error) {
+            res.json({status: 400, message: data.error.message})
+          } else {
+            res.json(responseFormatter(req, response, start_time, data))
+          }
         })
       } else {
-        res.json(responseFormatter(req, response, start_time))
+        response.json().then(data => {
+          if (data.error) {
+            res.json({status: 400, message: data.error.message})
+          }
+        })
       }
     })
     .catch(error => console.error(error))
@@ -111,20 +124,6 @@ const responseFormatter = (req, api_response, start_time, api_data) => {
       status: api_response.status,
       status_text: api_response.statusText
     }
-  }
-}
-
-/*
- * Returns JSON containing only required info about the post.
- */
-const formatPostInfo = (post) => {
-  return {
-    id: post.id,
-    type: post.type,
-    message: post.message,
-    created_time: post.created_time,
-    like_count: post.likes.summary.total_count,
-    comment_count: post.comments.summary.total_count
   }
 }
 
