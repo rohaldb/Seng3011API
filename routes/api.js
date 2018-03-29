@@ -3,19 +3,19 @@ var express = require('express')
 var moment = require('moment')
 var router = express.Router()
 
-const access_token = 'EAACEdEose0cBAK3sOAHEZAxpM0hbdymGx7woswCFOyzJ8DJEpC3imOH8IwZB4df0vDM7LrZCkePq3FG7AHFlMItGAMFSPnJlxjJQnlXs8flxcEk6vI2ACCLB30ZCq7kZCiXahvJmRAUFFyoOS5G3AM8ZCFZCObjGH7OquC9GtQBGcWO77BVZBpTVhIIAKKtqP6xTZA3MlIwhaDgZDZD'
+const access_token = 'EAACEdEose0cBACp14l1b0G1RCQR7uW4ypBcQrGxZA6gRbfE5iAZCavZAHdaqzxpuT8ABmfwseol68ZAZAI1XCCvPdKBIT293dHvzHuSYHnTN85l1tgg6dvgwKA9Cj9U1Xb8uUTyqolNm218KksPlQarfoGprcurgpdi7t3GFfeqiJR4FXYTUy1LXy8ZBur2iwZD'
 const fb_version = 'v2.6'
 
 /*
  * Post information route for a company post.
  */
-router.get('/:comapny/facebook/post/', function (req, res, next) {
+router.get('/post/:id', function (req, res, next) {
   // start timer
   const start_time = new Date()
-  const post = req.query.id
+  const post = req.params.id
 
   if (!post) {
-    //check for missing id parameter
+    // check for missing id parameter
     res.json({status: 400, message: 'Missing parameter: `id`'})
   } else {
     fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=id,type,message,created_time,likes.limit(0).summary(true),comments.limit(0).summary(true)&access_token=${access_token}`)
@@ -35,7 +35,7 @@ router.get('/:comapny/facebook/post/', function (req, res, next) {
 /*
  * Facebook page information route for a company.
  */
-router.get('/:company/facebook/', function (req, res, next) {
+router.get('/:company', function (req, res, next) {
   // start timer
   const start_time = new Date()
 
@@ -47,14 +47,11 @@ router.get('/:company/facebook/', function (req, res, next) {
   const end_date = moment(req.query.end_date)
 
   if (!start_date.isValid() || !end_date.isValid()) {
-    //check for valid date parameters
+    // check for valid date parameters
     res.json({status: 400, message: 'Invalid date parameters'})
   } else if (!statistics) {
-    //check for missing stats parameter
+    // check for missing stats parameter
     res.json({status: 400, message: 'Missing parameter: `statistics`'})
-  } else if (validStats(statistics) != '') {
-    //check for valid stats parameter
-    res.json({status: 400, message: validStats(statistics)})
   } else {
     fetch(graphAPIString(company, start_date, end_date, statistics))
     .then(response => {
@@ -77,7 +74,11 @@ router.get('/:company/facebook/', function (req, res, next) {
         }).then(response => {
           if (response) {
             response.json().then(data => {
-              res.json(responseFormatter(req, response, start_time, data))
+              if (data.error) {
+                res.json({status: 400, message: data.error.message})
+              } else {
+                res.json(responseFormatter(req, response, start_time, data))
+              }
             })
           }
         })
@@ -125,18 +126,6 @@ const formatPostInfo = (post) => {
     like_count: post.likes.summary.total_count,
     comment_count: post.comments.summary.total_count
   }
-}
-
-/*
- * Returns custom error text for unknown/unsupported statistic.
- */
-const validStats = (statistics) => {
-  for (s of statistics.split(',')) {
-    if (!s.match('^(id|name|website|description|category|fan_count|post_ids)$')) {
-      return `Unknown statistic: \`${s}\``
-    }
-  }
-  return '';
 }
 
 module.exports = router
