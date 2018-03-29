@@ -1,17 +1,23 @@
-var fetch = require('isomorphic-fetch')
-var express = require('express')
-var moment = require('moment')
-var sqlite3 = require('sqlite3').verbose()
-var router = express.Router()
+var fetch = require('isomorphic-fetch');
+var express = require('express');
+var moment = require('moment');
+var sqlite3 = require('sqlite3').verbose();
+var router = express.Router();
 
-const access_token = 'EAACEdEose0cBACz2JgeNU3V8CBuPZBSCbHo3Gnw6Jnm8GGxFNW6QbphiwZCZAlST18826JqzBhUKQCT4Dstro5BryFYjYpP1FL17ZCLlZCj3uFsxWqc37CwqhLTDJwtkDWAmoGTBdXGBQvAUKe1Yq7vMHs4VpyLUzHs9Gvez3GCKXa2n9tntQFWZCBM1hQh1XFuZCUS6XJt5QZDZD'
-const fb_version = 'v2.6'
+// Use Heroku REDIS_URL or default to local redis server
+var REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379"; 
+var cache = require('express-redis-cache')({
+  client: require('redis').createClient(REDIS_URL)
+});
+
+const access_token = 'EAACEdEose0cBACz2JgeNU3V8CBuPZBSCbHo3Gnw6Jnm8GGxFNW6QbphiwZCZAlST18826JqzBhUKQCT4Dstro5BryFYjYpP1FL17ZCLlZCj3uFsxWqc37CwqhLTDJwtkDWAmoGTBdXGBQvAUKe1Yq7vMHs4VpyLUzHs9Gvez3GCKXa2n9tntQFWZCBM1hQh1XFuZCUS6XJt5QZDZD';
+const fb_version = 'v2.6';
 const start_time = new Date()
 
 /*
  * Post information route for a company post.
  */
-router.get('/post/:id', function (req, res, next) {
+router.get('/post/:id', cache.route(), function (req, res, next) {
   // start timer
   const post = req.params.id
   let statistics = req.query.statistics ? req.query.statistics : 'id, type, message, created_time, likes'
@@ -41,7 +47,7 @@ router.get('/post/:id', function (req, res, next) {
 /*
  * Facebook page information route for a company.
  */
-router.get('/:company', function (req, res, next) {
+router.get('/:company', cache.route(), function (req, res, next) {
      // start timer
 
   const statistics = req.query.statistics ? req.query.statistics : 'id, name, website, description, category, fan_count, posts'

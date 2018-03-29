@@ -11,10 +11,12 @@
     "debug": "~2.6.9",
     "es6-promise": "^4.2.4",
     "express": "~4.15.5",
+    "express-redis-cache": "^1.1.1",
     "hbs": "~4.0.1",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.21.0",
     "morgan": "~1.9.0",
+    "redis": "^2.8.0",
     "serve-favicon": "~2.4.5",
     "sqlite3": "^4.0.0"
   }
