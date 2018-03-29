@@ -12,7 +12,7 @@ var cache = require('express-redis-cache')({
   client: require('redis').createClient(REDIS_URL)
 });
 
-const access_token = 'EAACEdEose0cBALL3EkMUYMy5DtXTluEZCH85xODEht5xZB9YFWXDEZCRTEXStZBPDutqx2sJJz8pXw9u50JFAKSflewMp2dZAsPDG64kGeRacwj7n5CC09o4350FpeCyXgdJXxHTwPEYY1TZCxlM55ZC9PiO6ToOZCglrQJLlHfND6KY7KZCOuTYOOoQ6WEL8AhyNJgMF97syqwZDZD'
+const access_token = 'EAACEdEose0cBAOoIZA8W8oIWm4FwXKZAjwKyh4gyMlsf7Ra6Y1VkymhHLEMGY5ebZCc7QnwhZAJVu9ilyzIJtxdOoy4s9L970b6bOgONrPP4BYllFGetj5onz5lIkpq7xqvu0IjnZB9CSJPKnC2Xhi3Yy0EtbPLz8fK37D8IDBfxjFQ1pPziXqebfXDkWbhl2KICuiBSP2wZDZD'
 const fb_version = 'v2.6'
 const start_time = new Date()
 
@@ -66,9 +66,6 @@ router.get('/:company', cache.route(), function (req, res, next) {
     if (!start_date.isValid() || !end_date.isValid()) {
       // check for valid date parameters
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
-    } else if (!statistics) {
-      // check for missing stats parameter
-      res.json(failureResponseFormatter(req, 400, 'Missing parameter: `statistics`'))
     } else {
       fetch(graphAPIString(company, start_date, end_date, statistics))
        .then(response => {
@@ -123,6 +120,9 @@ const successResponseFormatter = (req, api_response, api_data) => {
   }
 }
 
+/*
+ * Returns error response JSON containing metadata and empty data.
+ */
 const failureResponseFormatter = (req, response_code, status_text) => {
   const metadata = metaDataGen(req, response_code, status_text)
   return {
@@ -131,6 +131,9 @@ const failureResponseFormatter = (req, response_code, status_text) => {
   }
 }
 
+/*
+ * Returns metadata for the current API query.
+ */
 const metaDataGen = (req, response_code, status_text, api_data = null) => {
   const end_time = new Date()
   return {
@@ -180,6 +183,9 @@ const formatPostInfo = (post) => {
   return ret
 }
 
+/*
+ * Open database connection to company mapping database.
+ */
 const db = new sqlite3.Database('allcompanies.db', (err) => {
   if (err) {
     console.error(err.message)
