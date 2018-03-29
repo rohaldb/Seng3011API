@@ -3,7 +3,12 @@ var express = require('express');
 var moment = require('moment');
 var sqlite3 = require('sqlite3').verbose();
 var router = express.Router();
-var cache = require('express-redis-cache')();
+
+// Use Heroku REDIS_URL or default to local redis server
+var REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379"; 
+var cache = require('express-redis-cache')({
+    client: require('redis').createClient(REDIS_URL)
+});
 
 const access_token = 'EAACEdEose0cBAHnu4I0UYp07fUTIeVRk2bQiDmhLCj1zFKIq4U5dtqYKvneh69DPkayCEzklUFZALKeUZAQvmU7tT1IWy9xG7YIpUgy2TVXMrFI3RiSh6VCy8pmfZCHvPuwLVq3J0GQZCuhRPfdl7qJHKF2rbqZCQgVo7zZAFDm2nKysWOIBtbhivhnyVeQrdFzctGM1vLmqd1h7brCMQcwrmji2NmVmoZD';
 const fb_version = 'v2.6';
