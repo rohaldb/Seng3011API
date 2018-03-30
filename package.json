@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "redis-server & node ./bin/www",
+    "start": "redis-cli flushall; redis-server & node ./bin/www",
     "prod-heroku": "node ./bin/www"
   },
   "dependencies": {
@@ -20,5 +20,8 @@
     "redis": "^2.8.0",
     "serve-favicon": "~2.4.5",
     "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {
+    "newman": "^3.9.3"
   }
 }
