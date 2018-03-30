@@ -14,6 +14,7 @@ var cache = require('express-redis-cache')({
 
 //temporary access token - replace with long-lived token when fb unblocks
 //const access_token = 'EAACEdEose0cBAEG1ZCV4VRmm76exnxgcEMXpKdC9a9tHrzrZAa50t3KabHqU9BCuqRnSeoHrulN25Bs2XANqLdLRdXEbCsZBuXpiuiUuATK0F5dsoGYISCZBGAizCzmfdFjcUU8TsZApSZAaNmG9oINEqw49IV0jkJZCUCNxCPYY1y7ItZCqdfQbKxyRIYVbQRaYOAdc3MnD6QZDZD'
+var access_token = ''
 
 const fb_version = 'v2.6'
 const start_time = new Date()
@@ -32,7 +33,7 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
   if (!req.query.access_token || req.query.access_token.length < 10) {
     res.json(failureResponseFormatter(req, 400, 'Missing parameter `access_token`'))
   }
-  var access_token = req.query.access_token;
+  access_token = req.query.access_token;
 
   fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=${statistics}&access_token=${access_token}`)
   .then(function (response) {
@@ -67,7 +68,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
   if (!req.query.access_token || req.query.access_token.length < 10) {
     res.json(failureResponseFormatter(req, 400, 'Missing parameter `access_token`'))
   }
-  var access_token = req.query.access_token;
+  access_token = req.query.access_token;
 
   const start_date = moment(req.query.start_date)
   const end_date = moment(req.query.end_date)
