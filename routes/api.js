@@ -12,7 +12,7 @@ var cache = require('express-redis-cache')({
   client: require('redis').createClient(REDIS_URL)
 });
 
-const access_token = 'EAACEdEose0cBAIUrypWQoloLuTPsXyJIimViaT0dL5RIbAgux2AupGO0LDsj5IJaCKPHIhJ7j5RYlA1M4QQVw7f15FSVZBZCA1ktRYQ9MGwVQGE7jKg5PTNndALqSFM8UkVHuOgRD4nbQZCI8wRmjN4tJqPNmzPsnSb2YR9EZAvAHu7hf3VTZAXEzoSU4bGsiLId4XQHxCQZDZD'
+const access_token = 'EAACEdEose0cBAEG1ZCV4VRmm76exnxgcEMXpKdC9a9tHrzrZAa50t3KabHqU9BCuqRnSeoHrulN25Bs2XANqLdLRdXEbCsZBuXpiuiUuATK0F5dsoGYISCZBGAizCzmfdFjcUU8TsZApSZAaNmG9oINEqw49IV0jkJZCUCNxCPYY1y7ItZCqdfQbKxyRIYVbQRaYOAdc3MnD6QZDZD'
 const fb_version = 'v2.6'
 const start_time = new Date()
 const defaultPostParams = 'id, type, message, created_time, likes.limit(0).summary(true), comments.limit(0).summary(true)'
