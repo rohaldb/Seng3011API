@@ -59,7 +59,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
 
   db.each(`SELECT *, COUNT(1) > 0
   FROM ListedCompanies
-  WHERE Code = '${req.params.company}' LIMIT 1`, (err, row) => {
+  WHERE Code = '${req.params.company}' COLLATE NOCASE LIMIT 1`, (err, row) => {
     if (err) {
       console.error(err.message)
     }
