@@ -216,24 +216,24 @@ const validCompanyStats = (statistics) => {
     if (i > 0) {
       return 'Statistic `posts` specified more than once (not allowed since version 2)'
     }
-    if (!(s[0].match('^posts\{[^,]+(,[^,]+)*\}$') && validPostStats(s[0]) === '')
+    if (!(s[0].match('^posts\ *\{[^,]+(,[^,]+)*\}$') && validPostStats(s[0]) === '')
 ) {
       return `Unknown statistic: \`${s[0]}\``
     }
-    statistics = statistics.replace(/posts\{.+?\}/, '');
+    statistics = statistics.replace(/posts\ *\{.+?\}/, '');
     i++
   }
-  statistics = statistics.replace(/posts(\{.+\})/g, '')
-  if (statistics.match(/posts/)) {
+  statistics = statistics.replace(/posts\ *(\{.+\})/g, '')
+  if (statistics.match(/posts/) && i > 0) {
     return 'Statistic `posts` specified more than once (not allowed since version 2)'
   }
 
   var seen = {}
   for (s of statistics.split(',')) {
-    if (s === '') continue;
+    if (s === '' || s === ' ') continue;
     if (seen[s]) {
       return `Statistic \`${s}\` specified more than once (not allowed since version 2)`
-    } else if (!s.match('^(id|name|website|description|category|fan_count|posts)$')) {
+    } else if (!s.match('^\ *(id|name|website|description|category|fan_count|posts)\ *$')) {
       return `Unknown statistic: \`${s}\``
     } else {
       seen[s] = 1
@@ -251,7 +251,7 @@ const validPostStats = (statistics) => {
   for (s of statistics.split(',')) {
     if (seen[s]) {
       return `Statistic \`${s}\` specified more than once (not allowed since version 2)`
-    } else if (!s.match('^(id|type|message|created_time|likes|comments)$')) {
+    } else if (!s.match('^\ *(id|type|message|created_time|likes|comments)\ *$')) {
       return `Unknown statistic: \`${s}\``
     } else {
       seen[s] = 1
