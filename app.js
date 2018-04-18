@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', index)
+app.use('/', api) /* redirect to the latest api */
 app.use('/api', api)
 app.use('/api/v1', api1)
 app.use('/api/v2', api2)

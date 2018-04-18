@@ -7,7 +7,7 @@ var router = express.Router();
 /*
  * Use Heroku REDIS_URL or default to local redis server.
  */
-var REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
+var REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 var cache = require('express-redis-cache')({
   client: require('redis').createClient(REDIS_URL)
 });
@@ -22,7 +22,7 @@ const defaultCompanyParams = `id, name, website, description, category, fan_coun
  * Report error if unspecified endpoint.
  */
 router.get('/', cache.route(), function (req, res, next) {
-  res.json(failureResponseFormatter(req, 400, "No endpoint specified"))
+  res.json(failureResponseFormatter(req, 400, 'No endpoint specified'))
 })
 
 /*
@@ -210,23 +210,36 @@ const formatPostInfo = (data) => {
  */
 const validCompanyStats = (statistics) => {
   /* validate post params first */
-  var m = statistics.match('posts\{.+\}')
-  if (m) {
-    for (s of m) {
-      if (!(s.match('^posts\{[^,]+(,[^,]+)*\}$') && validPostStats(s) === '')) { 
-        return `Unknown statistic: \`${s}\``
-      }
+  var s = ''
+  var i = 0
+  while (s = statistics.match(/posts\{.+?\}/)) {
+    if (i > 0) {
+      return 'Statistic `posts` specified more than once (not allowed since version 2)'
     }
+    if (!(s[0].match('^posts\{[^,]+(,[^,]+)*\}$') && validPostStats(s[0]) === '')
+) {
+      return `Unknown statistic: \`${s[0]}\``
+    }
+    statistics = statistics.replace(/posts\{.+?\}/, '');
+    i++
   }
-  statistics = statistics.replace(/posts(\{.+\})?/g, '')
+  statistics = statistics.replace(/posts(\{.+\})/g, '')
+  if (statistics.match(/posts/)) {
+    return 'Statistic `posts` specified more than once (not allowed since version 2)'
+  }
 
+  var seen = {}
   for (s of statistics.split(',')) {
     if (s === '') continue;
-    if (!s.match('^(id|name|website|description|category|fan_count|posts)$')) {
+    if (seen[s]) {
+      return `Statistic \`${s}\` specified more than once (not allowed since version 2)`
+    } else if (!s.match('^(id|name|website|description|category|fan_count|posts)$')) {
       return `Unknown statistic: \`${s}\``
+    } else {
+      seen[s] = 1
     }
   }
-  return '';
+  return ''
 }
 
 /*
@@ -234,12 +247,17 @@ const validCompanyStats = (statistics) => {
  */
 const validPostStats = (statistics) => {
   statistics = statistics.replace(/\{|\}/g, '').replace(/^posts/, '')
+  var seen = {}
   for (s of statistics.split(',')) {
-    if (!s.match('^(id|type|message|created_time|likes|comments)$')) {
+    if (seen[s]) {
+      return `Statistic \`${s}\` specified more than once (not allowed since version 2)`
+    } else if (!s.match('^(id|type|message|created_time|likes|comments)$')) {
       return `Unknown statistic: \`${s}\``
+    } else {
+      seen[s] = 1
     }
   }
-  return '';
+  return ''
 }
 
 /*
