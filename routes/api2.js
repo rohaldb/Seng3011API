@@ -82,14 +82,17 @@ router.get('/:company', cache.route(), function (req, res, next) {
   const start_date = moment(req.query.start_date)
   const end_date = moment(req.query.end_date)
 
+  /* allow for .ax suffix on company stock code */
+  var c = req.params.company.toUpperCase().replace(/\.ax$/, '')
+
   db.each(`SELECT *, COUNT(1) > 0
-  FROM ListedCompanies
-  WHERE Code = '${req.params.company}' COLLATE NOCASE LIMIT 1`, (err, row) => {
+    FROM ASXListedCompanies
+    WHERE (Code = '${c}' OR Company LIKE '${c}%')
+    AND Code != null LIMIT 1`, (err, row) => {
     if (err) {
       console.error(err.message)
     }
-
-    const company = row.Code ? row.Company : req.params.company
+    const company = row.Code ? row.Pageid : req.params.company
 
     if (!start_date.isValid() || !end_date.isValid()) {
       /* check for valid date parameters */
@@ -210,6 +213,7 @@ const formatPostInfo = (data) => {
  */
 const validCompanyStats = (statistics) => {
   /* validate post params first */
+  var stats = statistics
   var s = ''
   var i = 0
   while (s = statistics.match(/posts\{.+?\}/)) {
@@ -239,6 +243,7 @@ const validCompanyStats = (statistics) => {
       seen[s] = 1
     }
   }
+  if (stats.match(/^,|,$/) || stats.match(/,,/)) return `Malformed statistics: \`${stats}\``
   return ''
 }
 
@@ -246,6 +251,7 @@ const validCompanyStats = (statistics) => {
  * Returns custom error text for unknown/unsupported post statistic.
  */
 const validPostStats = (statistics) => {
+  var stats = statistics
   statistics = statistics.replace(/\{|\}/g, '').replace(/^posts/, '')
   var seen = {}
   for (s of statistics.split(',')) {
@@ -257,13 +263,14 @@ const validPostStats = (statistics) => {
       seen[s] = 1
     }
   }
+  if (stats.match(/^,|,$/) || stats.match(/,,/)) return `Malformed statistics: \`${stats}\``
   return ''
 }
 
 /*
  * Open database connection to company mapping database.
  */
-const db = new sqlite3.Database('allcompanies.db', (err) => {
+const db = new sqlite3.Database('curatedCompanies.db', (err) => {
   if (err) {
     console.error(err.message)
   }
