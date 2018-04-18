@@ -12,7 +12,12 @@ var api2 = require('./routes/api2')
 
 var app = express()
 
-// view engine setup
+/* allow from port 3001 & from webclient */
+var cors = require('cors');
+app.use(cors({origin: 'http://localhost:3001'}));
+//app.use(cors({origin: 'https://seng3011-web-client.firebaseapp.com/'}));
+
+/* view engine setup */
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
@@ -29,14 +34,14 @@ app.use('/api', api)
 app.use('/api/v1', api1)
 app.use('/api/v2', api2)
 
-// catch 404 and forward to error handler
+/* catch 404 and forward to error handler */
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
-// error handler
+/* error handler */
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
