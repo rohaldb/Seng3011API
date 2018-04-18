@@ -83,16 +83,14 @@ router.get('/:company', cache.route(), function (req, res, next) {
   const end_date = moment(req.query.end_date)
 
   /* allow for .ax suffix on company stock code */
-  var c = req.params.company.toUpperCase().replace(/\.ax$/, '')
-
+  var c = req.params.company.replace(/\.ax$/i, '').toUpperCase()
   db.each(`SELECT *, COUNT(1) > 0
     FROM ASXListedCompanies
-    WHERE (Code = '${c}' OR Company LIKE '${c}%')
-    AND Code != null LIMIT 1`, (err, row) => {
+    WHERE (Code = '${c}' OR Company LIKE '${c}%') LIMIT 1`, (err, row) => {
     if (err) {
       console.error(err.message)
     }
-    const company = row.Code ? row.Pageid : req.params.company
+    const company = row.Pageid ? row.Pageid : c
 
     if (!start_date.isValid() || !end_date.isValid()) {
       /* check for valid date parameters */
