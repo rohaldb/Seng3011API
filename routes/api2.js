@@ -100,6 +100,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
       /* check for valid date parameters */
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
     } else {
+      console.log(graphAPIString(company, start_date, end_date, statistics))
       fetch(graphAPIString(company, start_date, end_date, statistics))
       .then(response => {
         if (response.ok) {
@@ -187,6 +188,9 @@ const metaDataGen = (req, response_code, status_text, api_data = null) => {
  * Converts user's paramaters for likes and comments into Facebook's equivalent.
  */
 const preprocessQuery = (params) => {
+  /* first, request all fields of posts by default */
+  params = params.replace(/posts\ *(,|$)/, `posts\{${defaultPostParams}\}$1`)
+
   params = params.replace(/\blikes\b/, 'likes.limit(0).summary(true)')
   params = params.replace(/\bcomments\b/, 'comments.limit(0).summary(true)')
   return params
