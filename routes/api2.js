@@ -87,9 +87,10 @@ router.get('/:company', cache.route(), function (req, res, next) {
 
   /* allow for .ax suffix on company stock code */
   var c = req.params.company.replace(/\.ax$/i, '').toUpperCase()
-  db.each(`SELECT *, COUNT(1) > 0
+  db.each(`SELECT *
     FROM ASXListedCompanies
-    WHERE (Code = '${c}' OR Company LIKE '${c}%') LIMIT 1`, (err, row) => {
+    WHERE (Code = '${c}' OR Company LIKE '${c}%')
+    AND Pageid != '' LIMIT 1`, (err, row) => {
     if (err) {
       console.error(err.message)
     }
@@ -106,12 +107,14 @@ router.get('/:company', cache.route(), function (req, res, next) {
             res.json(successResponseFormatter(req, response, formatPostInfo(data)))
           }).catch(error => console.error(error))
         } else {
+          /* search deprecated, so this remains here for legacy reasons */
+          console.log('warning: search deprecated')
           return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
         }
       }).then(response => {
         if (response) {
           response.json().then(data => {
-            if (data.data[0]) {
+            if (data.data && data.data[0]) {
               const companyId = data.data[0].id
               return fetch(graphAPIString(companyId, start_date, end_date, statistics))
             } else {
