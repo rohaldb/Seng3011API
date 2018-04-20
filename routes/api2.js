@@ -101,7 +101,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
         if (response.ok) {
           response.json().then(data => {
             res.json(successResponseFormatter(req, response, formatPostInfo(data)))
-          })
+          }).catch(error => console.error(error))
         } else {
           return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
         }
@@ -122,9 +122,9 @@ router.get('/:company', cache.route(), function (req, res, next) {
                 } else {
                   res.json(successResponseFormatter(req, response, formatPostInfo(data)))
                 }
-              })
+              }).catch(error => console.error(error))
             }
-          })
+          }).catch(error => console.error(error))
         }
       }).catch(error => console.error(error))
     }
