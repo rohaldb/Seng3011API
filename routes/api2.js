@@ -108,6 +108,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
             res.json(successResponseFormatter(req, response, formatPostInfo(data)))
           }).catch(error => console.error(error))
         } else {
+          /* yuk - fix this */
           res.json(failureResponseFormatter(req, 400, `Unknown company \`${company}\``))
           /* search deprecated, so this remains here for legacy reasons */
           /* return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`) */
