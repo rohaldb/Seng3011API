@@ -87,9 +87,9 @@ router.get('/:company', cache.route(), function (req, res, next) {
 
   /* allow for .ax suffix on company stock code */
   var c = req.params.company.replace(/\.ax$/i, '').toUpperCase()
-  db.each(`SELECT *
+  db.each(`SELECT *, COUNT(1) > 0
     FROM ASXListedCompanies
-    WHERE (Code = '${c}' OR Company LIKE '${c}%')
+    WHERE (Code = '${c}' OR (Company = '${c}' OR Company LIKE '${c} %'))
     AND Pageid != '' LIMIT 1`, (err, row) => {
     if (err) {
       console.error(err.message)
@@ -107,9 +107,9 @@ router.get('/:company', cache.route(), function (req, res, next) {
             res.json(successResponseFormatter(req, response, formatPostInfo(data)))
           }).catch(error => console.error(error))
         } else {
+          res.json(failureResponseFormatter(req, 400, `Unknown company \`${company}\``))
           /* search deprecated, so this remains here for legacy reasons */
-          console.log('warning: search deprecated')
-          return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`)
+          /* return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`) */
         }
       }).then(response => {
         if (response) {
