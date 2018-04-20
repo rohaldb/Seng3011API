@@ -111,7 +111,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
       }).then(response => {
         if (response) {
           response.json().then(data => {
-            if (data.data[0]) {
+            if (data.data && data.data[0]) {
               const companyId = data.data[0].id
               return fetch(graphAPIString(companyId, start_date, end_date, statistics))
             } else {
