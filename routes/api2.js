@@ -15,13 +15,16 @@ var cache = require('express-redis-cache')({
 var access_token = ''
 const fb_version = 'v2.6'
 const start_time = new Date()
-const defaultPostParams = 'id, type, message, created_time, likes.limit(0).summary(true), comments.limit(0).summary(true)'
+const defaultPostParams = 'id, type, message, created_time, likes, comments'
 const defaultCompanyParams = `id, name, website, description, category, fan_count, posts \{${defaultPostParams}\}`
 
 /*
  * Report error if unspecified endpoint.
  */
 router.get('/', cache.route(), function (req, res, next) {
+  res.json(failureResponseFormatter(req, 400, 'No endpoint specified'))
+})
+router.get('/api', cache.route(), function (req, res, next) {
   res.json(failureResponseFormatter(req, 400, 'No endpoint specified'))
 })
 
@@ -31,7 +34,6 @@ router.get('/', cache.route(), function (req, res, next) {
 router.get('/post/:id', cache.route(), function (req, res, next) {
   const post = req.params.id
   let statistics = req.query.statistics || defaultPostParams
-  statistics = preprocessQuery(statistics)
 
   if (!req.query.access_token || req.query.access_token.length < 10) {
     /* ensure an access token is provided */
@@ -40,6 +42,7 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
     /* check for valid stats parameter */
     res.json(failureResponseFormatter(req, 400, validPostStats(statistics)))
   }
+  statistics = preprocessQuery(statistics)
   access_token = req.query.access_token;
 
   fetch(`https://graph.facebook.com/${fb_version}/${post}/?fields=${statistics}&access_token=${access_token}`)
@@ -68,7 +71,6 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
  */
 router.get('/:company', cache.route(), function (req, res, next) {
   let statistics = req.query.statistics || defaultCompanyParams
-  statistics = preprocessQuery(statistics)
 
   if (!req.query.access_token || req.query.access_token.length < 10) {
     /* ensure an access token is provided */
@@ -77,6 +79,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
     /* check for valid stats parameter */
     res.json(failureResponseFormatter(req, 400, validCompanyStats(statistics)))
   }
+  statistics = preprocessQuery(statistics)
   access_token = req.query.access_token;
 
   const start_date = moment(req.query.start_date)
@@ -108,7 +111,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
       }).then(response => {
         if (response) {
           response.json().then(data => {
-            if (data.data[0]) {
+            if (data.data && data.data[0]) {
               const companyId = data.data[0].id
               return fetch(graphAPIString(companyId, start_date, end_date, statistics))
             } else {
