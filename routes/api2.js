@@ -9,7 +9,8 @@ var router = express.Router();
  */
 var REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 var cache = require('express-redis-cache')({
-  client: require('redis').createClient(REDIS_URL)
+  client: require('redis').createClient(REDIS_URL),
+  expire: 300,
 });
 
 var access_token = ''
