@@ -108,19 +108,23 @@ router.get('/:company', cache.route(), function (req, res, next) {
       .then(response => {
         if (response.ok) {
           response.json().then(data => {
-            console.log(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
-            fetch(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
-            .then(response => {
-              if (response.ok) {
-                response.json().then(posts => {
-                  if (posts) data['posts'] = posts /* combine posts with company data */
-                  res.json(successResponseFormatter(req, response, formatPostInfo(data)))
-                }).catch(error => console.error(error))
-              } else {
-                /* some unknown error occured */
-                res.json(failureResponseFormatter(req, 400, 'An unknown error occured'))
-              }
-            })
+            if (!statistics.match(/posts/)) {
+              res.json(successResponseFormatter(req, response, formatPostInfo(data)))
+            } else {
+              console.log(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+              fetch(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+              .then(response => {
+                if (response.ok) {
+                  response.json().then(posts => {
+                    if (posts) data['posts'] = posts /* combine posts with company data */
+                    res.json(successResponseFormatter(req, response, formatPostInfo(data)))
+                  }).catch(error => console.error(error))
+                } else {
+                  /* some unknown error occured - this is very unlikely */
+                  res.json(failureResponseFormatter(req, 400, 'An unknown error occured'))
+                }
+              })
+            }
           }).catch(error => console.error(error))
         } else {
           response.json().then(data => {
@@ -131,7 +135,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
               /* somewhat informative error */
               res.json(failureResponseFormatter(req, 400, `Unknown company \`${req.params.company}\``))
             }
-          })
+          }).catch(error => console.error(error))
         }
       }).catch(error => console.error(error))
     }
