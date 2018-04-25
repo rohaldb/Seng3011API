@@ -95,7 +95,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
     if (err) {
       console.error(err.message)
     }
-    const company = row.Pageid ? row.Pageid : c
+    const company = (row && row.Pageid) ? row.Pageid : c
 
     if (!start_date.isValid() || !end_date.isValid()) {
       /* check for valid date parameters */
