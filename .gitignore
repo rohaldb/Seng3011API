@@ -7,3 +7,5 @@ dump.rdb
 *.gz
 *.tmp
 *.swp
+
+.idea/
