@@ -101,39 +101,28 @@ router.get('/:company', cache.route(), function (req, res, next) {
       /* check for valid date parameters */
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
     } else {
-      console.log(graphAPIString(company, start_date, end_date, statistics))
-      fetch(graphAPIString(company, start_date, end_date, statistics))
+      console.log(companyAPIString(company, statistics))
+      fetch(companyAPIString(company, statistics))
       .then(response => {
         if (response.ok) {
           response.json().then(data => {
-            res.json(successResponseFormatter(req, response, formatPostInfo(data)))
+            console.log(postAPIString(company, start_date, end_date, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+            fetch(postAPIString(company, start_date, end_date, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+            .then(response => {
+              if (response.ok) {
+                response.json().then(posts => {
+                  data['posts'] = posts /* combine posts with company data */
+                  res.json(successResponseFormatter(req, response, formatPostInfo(data)))
+                }).catch(error => console.error(error))
+              } else {
+                /* some unknown error occured - use fb's error reporting */
+                res.json(failureResponseFormatter(req, 400, data.error.message))
+              }
+            })
           }).catch(error => console.error(error))
         } else {
-          /* yuk - fix this */
+          /* somewhat informative error */
           res.json(failureResponseFormatter(req, 400, `Unknown company \`${company}\``))
-          /* search deprecated, so this remains here for legacy reasons */
-          /* return fetch(`https://graph.facebook.com/${fb_version}/search?q=${company}&type=page&fields=name,fan_count&access_token=${access_token}`) */
-        }
-      }).then(response => {
-        if (response) {
-          response.json().then(data => {
-            if (data.data && data.data[0]) {
-              const companyId = data.data[0].id
-              return fetch(graphAPIString(companyId, start_date, end_date, statistics))
-            } else {
-              res.json(successResponseFormatter(req, response))
-            }
-          }).then(response => {
-            if (response) {
-              response.json().then(data => {
-                if (data.error) {
-                  res.json(failureResponseFormatter(req, 400, data.error.message))
-                } else {
-                  res.json(successResponseFormatter(req, response, formatPostInfo(data)))
-                }
-              }).catch(error => console.error(error))
-            }
-          }).catch(error => console.error(error))
         }
       }).catch(error => console.error(error))
     }
@@ -143,8 +132,15 @@ router.get('/:company', cache.route(), function (req, res, next) {
 /*
  * Returns URL to pass to Facebook Graph API for company info.
  */
-const graphAPIString = (company, start_date, end_date, statistics) => {
-  return `https://graph.facebook.com/${fb_version}/${company}?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
+const companyAPIString = (company, statistics) => {
+  return `https://graph.facebook.com/${fb_version}/${company}?fields=${statistics}&access_token=${access_token}`
+}
+
+/*
+ * Returns URL to pass to Facebook Graph API for company posts.
+ */
+const postAPIString = (company, start_date, end_date, statistics) => {
+  return `https://graph.facebook.com/${fb_version}/${company}/posts?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
 }
 
 /*
@@ -176,7 +172,7 @@ const metaDataGen = (req, response_code, status_text, api_data = null) => {
   const end_time = new Date()
   return {
     dev_team: 'Team Unassigned',
-    version: '2.0.0',
+    version: '3.0.0',
     start_time,
     end_time,
     time_elapsed: end_time - start_time,
