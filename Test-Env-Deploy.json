@@ -1,0 +1,27 @@
+{
+  "id": "c82f6d54-96d2-4f3f-a219-eabfd2b821a9",
+  "name": "Test-Env-Deploy",
+  "values": [
+    {
+      "key": "access_token",
+      "value": "EAACEdEose0cBAEh9ZB2HkURtFHBRLfCn1NwANnUfyns0gCTQvpIVJo7sEOni1TgjeAsLUcmRluCN6jE64hdZBZCbowxDNUNPLXKZB4PjNASuV2uZBgF9PdGUnJcet4fSH8pHvbSWkS8erwjktFeWlw5cYz0QkC9rLZBG2BWaJcxWNMwN8PNqJ8LdXwYhk9KcPaYUBmUhmcWgZDZD",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "url",
+      "value": "https://unassigned-api.herokuapp.com/api/v3/",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "base_url",
+      "value": "https://unassigned-api.herokuapp.com/",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-04-25T10:52:07.048Z",
+  "_postman_exported_using": "Postman/6.0.10"
+}
