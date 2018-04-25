@@ -83,6 +83,8 @@ router.get('/:company', cache.route(), function (req, res, next) {
   statistics = preprocessQuery(statistics)
   access_token = req.query.access_token;
 
+  const has_start = req.query.start_date ? true : false
+  const has_end = req.query.end_date ? true : false
   const start_date = moment(req.query.start_date)
   const end_date = moment(req.query.end_date)
 
@@ -106,23 +108,30 @@ router.get('/:company', cache.route(), function (req, res, next) {
       .then(response => {
         if (response.ok) {
           response.json().then(data => {
-            console.log(postAPIString(company, start_date, end_date, statistics.replace(/.*posts\ *\{|}.*/g, '')))
-            fetch(postAPIString(company, start_date, end_date, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+            console.log(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
+            fetch(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
             .then(response => {
               if (response.ok) {
                 response.json().then(posts => {
-                  data['posts'] = posts /* combine posts with company data */
+                  if (posts) data['posts'] = posts /* combine posts with company data */
                   res.json(successResponseFormatter(req, response, formatPostInfo(data)))
                 }).catch(error => console.error(error))
               } else {
-                /* some unknown error occured - use fb's error reporting */
-                res.json(failureResponseFormatter(req, 400, data.error.message))
+                /* some unknown error occured */
+                res.json(failureResponseFormatter(req, 400, 'An unknown error occured'))
               }
             })
           }).catch(error => console.error(error))
         } else {
-          /* somewhat informative error */
-          res.json(failureResponseFormatter(req, 400, `Unknown company \`${company}\``))
+          response.json().then(data => {
+            if (data && data.error && data.error.message && data.error.message.match(/access token/)) {
+              /* inform users of invalid or expired access token */
+              res.json(failureResponseFormatter(req, 400, 'Access token invalid or expired'))
+            } else {
+              /* somewhat informative error */
+              res.json(failureResponseFormatter(req, 400, `Unknown company \`${req.params.company}\``))
+            }
+          })
         }
       }).catch(error => console.error(error))
     }
@@ -139,8 +148,12 @@ const companyAPIString = (company, statistics) => {
 /*
  * Returns URL to pass to Facebook Graph API for company posts.
  */
-const postAPIString = (company, start_date, end_date, statistics) => {
-  return `https://graph.facebook.com/${fb_version}/${company}/posts?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
+const postAPIString = (company, start_date, end_date, pass_date, statistics) => {
+  if (pass_date) {
+    return `https://graph.facebook.com/${fb_version}/${company}/posts?since=${start_date.unix()}&until=${end_date.unix()}&fields=${statistics}&access_token=${access_token}`
+  } else {
+    return `https://graph.facebook.com/${fb_version}/${company}/posts?fields=${statistics}&access_token=${access_token}`
+  }
 }
 
 /*
