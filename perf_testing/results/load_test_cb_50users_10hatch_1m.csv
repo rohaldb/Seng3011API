@@ -1,0 +1,5 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","/api/v1/fbstats?pageid=anzaustralia&stats=name,fan_count,description,website,post_type,post_message,post_created_time,post_like_count,post_comment_count&startdate=2018-1-1T0:0:0&enddate=2018-2-1T0:0:0",14,0,36000,34730,19296,55054,22659,0.26
+"GET","/api/v1/fbstats?pageid=qantas&stats=name,fan_count,description,website,post_type,post_message,post_created_time,post_like_count,post_comment_count&startdate=2018-1-1T0:0:0&enddate=2018-2-1T0:0:0",5,0,40000,37008,24771,47824,50359,0.09
+"GET","/api/v1/fbstats?pageid=woolworths&stats=name,fan_count,description,website,post_type,post_message,post_created_time,post_like_count,post_comment_count&startdate=2018-1-1T0:0:0&enddate=2018-2-1T0:0:0",25,0,28000,26286,6596,44777,7319,0.47
+"None","Total",44,0,28000,30191,6596,55054,17091,0.82
