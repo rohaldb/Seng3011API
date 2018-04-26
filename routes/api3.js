@@ -112,7 +112,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
       /* check for valid date parameters */
       res.status(400)
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
-    } else if (!end_date.isAfter(start_date)) {
+    } else if (has_start && has_end && !end_date.isAfter(start_date)) {
       /* check that start_date <= end_date */
       res.status(400)
       res.json(failureResponseFormatter(req, 400, 'start_date must precede end_date'))
