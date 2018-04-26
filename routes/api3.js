@@ -112,13 +112,19 @@ router.get('/:company', cache.route(), function (req, res, next) {
       /* check for valid date parameters */
       res.status(400)
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
+    } else if (!end_date.isAfter(start_date)) {
+      /* check that start_date <= end_date */
+      res.status(400)
+      res.json(failureResponseFormatter(req, 400, 'start_date must precede end_date'))
     } else {
+      /* otherwise, proceed with query */
       console.log(companyAPIString(company, statistics))
       fetch(companyAPIString(company, statistics))
       .then(response => {
         if (response.ok) {
           response.json().then(data => {
             if (!statistics.match(/posts/)) {
+              /* format data immediately if posts not requested */
               res.json(successResponseFormatter(req, response, formatPostInfo(data)))
             } else {
               console.log(postAPIString(company, start_date, end_date, has_start && has_end, statistics.replace(/.*posts\ *\{|}.*/g, '')))
@@ -130,7 +136,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
                     res.json(successResponseFormatter(req, response, formatPostInfo(data)))
                   }).catch(error => console.error(error))
                 } else {
-                  /* some unknown error occured - this is very unlikely */
+                  /* some unknown error occured - this is very unlikely to occur */
                   res.status(400)
                   res.json(failureResponseFormatter(req, 400, 'An unknown error occured'))
                 }
