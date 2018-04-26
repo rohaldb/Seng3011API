@@ -8,7 +8,7 @@ Requirements
 
 Quick Start
 ===========
-1. Run `make setup` - this will install requests and locustio. Alternatively you can run `pip install requests locustio`.
+1. Run `make setup` - this will install requests and locustio. Alternatively you can run `pip install requests locustio`. You may need to refer to https://docs.locust.io/en/stable/installation.html for additional LocustIO installation instructions.
 2. Get a Facebook Graph API Token from https://developers.facebook.com/tools/explorer/ and insert it in the file CONFIG (replace "INSERT TOKEN HERE").
 
 Speed Testing
