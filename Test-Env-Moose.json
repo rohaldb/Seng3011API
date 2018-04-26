@@ -1,0 +1,15 @@
+{
+  "id": "88f55fa7-41e8-4379-92fb-a2cadc4669eb",
+  "name": "Test-Env-Moose",
+  "values": [
+    {
+      "key": "url",
+      "value": "http://seng3011-moose.herokuapp.com/v3",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-04-26T14:18:49.048Z",
+  "_postman_exported_using": "Postman/6.0.10"
+}

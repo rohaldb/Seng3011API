@@ -62,7 +62,6 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
           res.status(400)
           res.json(failureResponseFormatter(req, 400, data.error.message))
         } else {
-          res.status(400)
           res.json(successResponseFormatter(req, response, formatPostInfo(data)))
         }
       })
