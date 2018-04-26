@@ -23,9 +23,11 @@ const defaultCompanyParams = `id, name, website, description, category, fan_coun
  * Report error if unspecified endpoint.
  */
 router.get('/', cache.route(), function (req, res, next) {
+  res.status(400)
   res.json(failureResponseFormatter(req, 400, 'No endpoint specified'))
 })
 router.get('/api', cache.route(), function (req, res, next) {
+  res.status(400)
   res.json(failureResponseFormatter(req, 400, 'No endpoint specified'))
 })
 
@@ -38,9 +40,11 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
 
   if (!req.query.access_token || req.query.access_token.length < 10) {
     /* ensure an access token is provided */
+    res.status(400)
     res.json(failureResponseFormatter(req, 400, 'Missing parameter `access_token`'))
   } else if (validPostStats(statistics) !== '') {
     /* check for valid stats parameter */
+    res.status(400)
     res.json(failureResponseFormatter(req, 400, validPostStats(statistics)))
   }
   statistics = preprocessQuery(statistics)
@@ -51,14 +55,17 @@ router.get('/post/:id', cache.route(), function (req, res, next) {
     if (response.ok) {
       response.json().then(data => {
         if (data.error) {
+          res.status(400)
           res.json(failureResponseFormatter(req, 400, data.error.message))
         } else {
+          res.status(400)
           res.json(successResponseFormatter(req, response, formatPostInfo(data)))
         }
       })
     } else {
       response.json().then(data => {
         if (data.error) {
+          res.status(400)
           res.json(failureResponseFormatter(req, 400, data.error.message))
         }
       })
@@ -75,9 +82,11 @@ router.get('/:company', cache.route(), function (req, res, next) {
 
   if (!req.query.access_token || req.query.access_token.length < 10) {
     /* ensure an access token is provided */
+    res.status(400)
     res.json(failureResponseFormatter(req, 400, 'Missing parameter `access_token`'))
   } else if (validCompanyStats(statistics) != '') {
     /* check for valid stats parameter */
+    res.status(400)
     res.json(failureResponseFormatter(req, 400, validCompanyStats(statistics)))
   }
   statistics = preprocessQuery(statistics)
@@ -101,6 +110,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
 
     if (!start_date.isValid() || !end_date.isValid()) {
       /* check for valid date parameters */
+      res.status(400)
       res.json(failureResponseFormatter(req, 400, 'Invalid date parameters'))
     } else {
       console.log(companyAPIString(company, statistics))
@@ -121,6 +131,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
                   }).catch(error => console.error(error))
                 } else {
                   /* some unknown error occured - this is very unlikely */
+                  res.status(400)
                   res.json(failureResponseFormatter(req, 400, 'An unknown error occured'))
                 }
               })
@@ -130,9 +141,11 @@ router.get('/:company', cache.route(), function (req, res, next) {
           response.json().then(data => {
             if (data && data.error && data.error.message && data.error.message.match(/access token/)) {
               /* inform users of invalid or expired access token */
+              res.status(400)
               res.json(failureResponseFormatter(req, 400, 'Access token invalid or expired'))
             } else {
               /* somewhat informative error */
+              res.status(400)
               res.json(failureResponseFormatter(req, 400, `Unknown company \`${req.params.company}\``))
             }
           }).catch(error => console.error(error))
