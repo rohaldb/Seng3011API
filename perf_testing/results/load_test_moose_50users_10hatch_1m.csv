@@ -1,0 +1,5 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","/v3/company?id=anzaustralia&start_date=2018-01-01T00:00:00.000Z&end_date=2018-02-01T00:00:00.000Z&stats=name,fan_count,description,website,post_message,post_type,post_created_time,post_like_count,post_comment_count",2,18,16000,22368,15892,28844,16299,0.08
+"GET","/v3/company?id=qantas&start_date=2018-01-01T00:00:00.000Z&end_date=2018-02-01T00:00:00.000Z&stats=name,fan_count,description,website,post_message,post_type,post_created_time,post_like_count,post_comment_count",4,6,14000,18918,11150,27102,35175,0.16
+"GET","/v3/company?id=woolworths&start_date=2018-01-01T00:00:00.000Z&end_date=2018-02-01T00:00:00.000Z&stats=name,fan_count,description,website,post_message,post_type,post_created_time,post_like_count,post_comment_count",3,23,24000,23210,16552,29498,3141,0.12
+"None","Total",9,47,23000,21115,11150,29498,20302,0.36

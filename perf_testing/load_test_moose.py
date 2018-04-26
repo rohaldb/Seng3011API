@@ -17,8 +17,8 @@ class UserBehavior(TaskSet):
         self.client.get(gen_moose_endpoint('AUSTRALIA AND NEW ZEALAND BANKING'))
 
     @task(3)
-    def nvidia(self):
-        self.client.get(gen_moose_endpoint('NVIDIA'))
+    def woolworths(self):
+        self.client.get(gen_moose_endpoint('WOOLWORTHS'))
 
 class WebsiteUser(HttpLocust):
     task_set = UserBehavior

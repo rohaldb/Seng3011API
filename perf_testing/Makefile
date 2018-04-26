@@ -26,4 +26,4 @@ load_pv:
 	locust -f load_test_pv.py --host='https://positive-vibes.seng3011.com/v2.0/api'
 
 load_moose:
-	locust -f load_moose.py --host='http://seng3011-moose.herokuapp.com/v3'
+	locust -f load_test_moose.py --host='http://seng3011-moose.herokuapp.com/v3'

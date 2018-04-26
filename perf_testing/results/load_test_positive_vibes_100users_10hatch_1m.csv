@@ -1,0 +1,5 @@
+"Method","Name","# requests","# failures","Median response time","Average response time","Min response time","Max response time","Average Content Size","Requests/s"
+"GET","/v2.0/api/company/anzaustralia?includePosts=true&startDate=2018-01-01&endDate=2018-02-01",223,0,1000,1183,871,3372,24557,4.37
+"GET","/v2.0/api/company/qantas?includePosts=true&startDate=2018-01-01&endDate=2018-02-01",104,0,2500,2947,2277,9345,57207,2.04
+"GET","/v2.0/api/company/woolworths?includePosts=true&startDate=2018-01-01&endDate=2018-02-01",307,0,480,545,413,1416,7300,6.02
+"None","Total",634,0,920,1163,413,9345,21556,12.43
