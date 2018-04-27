@@ -8,6 +8,7 @@ Result Data
 -There are two spreadsheets in this directory: "API Speed Comparison.xlsx" and "API Load Testing Comparison.xlsx", respectively summarising the result data for speed testing and load testing.
 -Raw result data can be found in the results/ subdirectory.
 
+============
 Requirements
 ============
 -Python 3.5+
@@ -16,6 +17,7 @@ Requirements
 ===========
 Quick Start
 ===========
+IMPORTANT - DON'T SKIP STEP 2 OR THE TESTING WILL NOT WORK!
 1. Run `make setup` - this will install requests and locustio. Alternatively you can run `pip install requests locustio`. You may need to refer to https://docs.locust.io/en/stable/installation.html for additional LocustIO installation instructions.
 2. Get a Facebook Graph API Token from https://developers.facebook.com/tools/explorer/ and insert it in the file CONFIG (replace "INSERT TOKEN HERE").
 3. Run speed/load testing as specified below.
