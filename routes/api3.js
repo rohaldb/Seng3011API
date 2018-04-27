@@ -148,7 +148,7 @@ router.get('/:company', cache.route(), function (req, res, next) {
           }).catch(error => console.error(error))
         } else {
           response.json().then(data => {
-            if (data && data.error && data.error.message && data.error.message.match(/access token/)) {
+            if (data && data.error && data.error.message && data.error.message.match(/access token|temporarily disabled/)) {
               /* inform users of invalid or expired access token */
               res.status(400)
               res.json(failureResponseFormatter(req, 400, 'Access token invalid or expired'))
