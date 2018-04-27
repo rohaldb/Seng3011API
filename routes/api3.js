@@ -11,7 +11,7 @@ var REDIS_URL = process.env.REDIS_URL || 'redis://localhost:6379';
 var cache = require('express-redis-cache')({
   client: require('redis').createClient(REDIS_URL),
     expire: {
-      200: 300, /* expire successful requests every minute */
+      200: 300, /* expire successful requests 5 minutes */
       400: 1, /* expire these asap as a workaround to redis mapping 400 -> 200 if cached */
       xxx: 20 /* expire anything else every 20 seconds */
     }
