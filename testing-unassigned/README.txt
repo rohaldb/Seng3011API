@@ -5,14 +5,14 @@ Team Unassigned Testing README
 ============
 Requirements
 ============
--Newman - used to run our test suite on the command-line - refer to https://www.getpostman.com/docs/v6/postman/collection_runs/command_line_integration_with_newman for installation instructions. 
+-Newman - used to run our test suite on the command-line
 
 ===========
 Quick Start
 ===========
 IMPORTANT - DON'T SKIP STEP 1 OR THE TESTING WILL NOT WORK!
 1. Get a Facebook Graph API Token from https://developers.facebook.com/tools/explorer/ and insert it in the file Test-Env-Deploy.json (replace "INSERT FB TOKEN HERE").
-2. Install Newman
+2. Install Newman - refer to https://www.getpostman.com/docs/v6/postman/collection_runs/command_line_integration_with_newman for installation instructions. 
 3. Run `newman run api-tests.json -e Test-Env-Deploy.json` to execute the test cases on the latest version of the API.
 
 ================
