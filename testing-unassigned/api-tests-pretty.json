@@ -1,0 +1,1402 @@
+{
+  "id":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+  "name":"API Tests",
+  "description":null,
+  "auth":null,
+  "events":null,
+  "variables":null,
+  "order":[
+    "f949cec9-c227-44e0-a136-55e40bfa0b5e",
+    "d2e3a54b-12c6-4750-b5fc-ca67a06bc176",
+    "7f8ea193-a8d4-485a-b315-52b9398e9c29",
+    "dc7a053f-2ee6-479f-92a3-4eb94c29f946",
+    "ff040042-d02d-43a9-b342-91ba73eac158",
+    "9bec9ff0-ca9e-4f54-a48d-acc9c210a934",
+    "b990d5a7-d26f-4b57-9329-a706493c7f59",
+    "d479ff54-4c54-4aaa-ac81-a21e05eb2b68",
+    "6ca58259-cea1-4d77-84a5-36aa75adf22b",
+    "4046407a-08de-460f-b610-8222e5f4a8ff",
+    "e9cc283b-acaf-4a7c-aec7-26cb004a3fb5",
+    "dc2f7182-606c-46f0-9bca-baab3f5566d4",
+    "31a3009c-4e11-4e9c-9346-0aba5650804c",
+    "c87f0451-3a0a-4fb8-8161-9ae91bb62a24",
+    "3bb1ad31-34a7-4ad0-a5c2-b017f0d692f4",
+    "d8747403-d2cb-4230-94ec-a08d503c8b47"
+  ],
+  "folders_order":[
+
+  ],
+  "folders":[
+
+  ],
+  "requests":[
+    {
+      "id":"31a3009c-4e11-4e9c-9346-0aba5650804c",
+      "name":"Missing Access Token",
+      "url":"{{url}}\/facebook?statistic=bla",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"statistic",
+          "value":"bla",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"20937656-2fe6-48c1-869d-a4bf2459185d",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 1;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Missing parameter `access_token`\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 1;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Missing parameter `access_token`\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"3bb1ad31-34a7-4ad0-a5c2-b017f0d692f4",
+      "name":"Missing Endpoint 1",
+      "url":"{{base_url}}\/",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"c0a00819-15af-4c7a-a958-66d0f54fc9cf",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 0;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"No endpoint specified\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 0;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"No endpoint specified\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"4046407a-08de-460f-b610-8222e5f4a8ff",
+      "name":"Malformed Company Stats",
+      "url":"{{url}}\/facebook?statistics=id,,name&access_token={{access_token}}",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"statistics",
+          "value":"id,,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"23727125-faaa-40d8-9c9b-b147d5e587f8",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Malformed statistics: `id,,name`\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Malformed statistics: `id,,name`\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"6ca58259-cea1-4d77-84a5-36aa75adf22b",
+      "name":"Duplicate Company Stat",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,name,name",
+      "description":null,
+      "data":[
+
+      ],
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,name,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"90e1b2e9-c253-427e-a8be-526580b080ea",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Statistic `name` specified more than once (not allowed since version 2)\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Statistic `name` specified more than once (not allowed since version 2)\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"7f8ea193-a8d4-485a-b315-52b9398e9c29",
+      "name":"Page Stats Specified",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,name",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"5d0dcb4a-eb59-4a3e-8295-5c57fcd613b7",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.id !== undefined;",
+              "tests[\"Check result id\"] = res.data.id === \"20531316728\";",
+              "tests[\"Response has name\"] = res.data.name !== undefined;",
+              "tests[\"Check result name\"] = res.data.name === \"Facebook\";",
+              "tests[\"Response does not have website\"] = res.data.website === undefined;",
+              "tests[\"Response does not have category\"] = res.data.category === undefined;",
+              "tests[\"Response does not have fan count\"] = res.data.fan_count === undefined;",
+              "tests[\"Response does not have posts\"] = res.data.posts === undefined;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 200;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"OK\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.id !== undefined;\ntests[\"Check result id\"] = res.data.id === \"20531316728\";\ntests[\"Response has name\"] = res.data.name !== undefined;\ntests[\"Check result name\"] = res.data.name === \"Facebook\";\ntests[\"Response does not have website\"] = res.data.website === undefined;\ntests[\"Response does not have category\"] = res.data.category === undefined;\ntests[\"Response does not have fan count\"] = res.data.fan_count === undefined;\ntests[\"Response does not have posts\"] = res.data.posts === undefined;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 200;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"OK\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"9bec9ff0-ca9e-4f54-a48d-acc9c210a934",
+      "name":"Unknown Company",
+      "url":"{{url}}\/hello-world?access_token={{access_token}}",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"bbf6ceb8-9d23-42a1-84d3-6002f1c630ff",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 1;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Unknown company `hello-world`\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 1;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Unknown company `hello-world`\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"b990d5a7-d26f-4b57-9329-a706493c7f59",
+      "name":"Invalid Date Range",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2015-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2015-09-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"84751048-5e39-49d4-b317-00feb4a22198",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"start_date must precede end_date\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 4;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"start_date must precede end_date\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"c87f0451-3a0a-4fb8-8161-9ae91bb62a24",
+      "name":"Invalid or Expired Access Token",
+      "url":"{{url}}\/facebook?statistics=website,name&access_token=this-is-a-fake-access-token-or-equivalently-an-access-token-that-has-expired",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"statistics",
+          "value":"website,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"access_token",
+          "value":"this-is-a-fake-access-token-or-equivalently-an-access-token-that-has-expired",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"9b6916a8-d7b6-47a1-9627-801efb3369eb",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Access token invalid or expired\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Access token invalid or expired\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"d2e3a54b-12c6-4750-b5fc-ca67a06bc176",
+      "name":"Post Query",
+      "url":"{{url}}\/post\/477181792361674_1490828694330307?access_token={{access_token}}",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"06ab6b02-2b36-4ae2-a6a5-3e0d8bf3dc9a",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.id !== undefined;",
+              "tests[\"Check result id\"] = res.data.id === \"477181792361674_1490828694330307\";",
+              "tests[\"Response has type\"] = res.data.type !== undefined;",
+              "tests[\"Check result type\"] = res.data.type === \"photo\";",
+              "tests[\"Response has message\"] = res.data.message !== undefined;",
+              "tests[\"Check result message\"] = res.data.message.length > 10;",
+              "tests[\"Response has created time\"] = res.data.created_time !== undefined;",
+              "tests[\"Response has likes\"] = res.data.likes !== undefined;",
+              "tests[\"Check result likes type\"] = typeof(res.data.likes) === \"number\";",
+              "tests[\"Check result likes value\"] = res.data.likes > 0;",
+              "tests[\"Post has comments\"] = res.data.comments !== undefined;",
+              "tests[\"Check result commnets type\"] = typeof(res.data.comments) === \"number\";",
+              "tests[\"Check result commnets value\"] = res.data.comments > 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 1;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 200;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"OK\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.id !== undefined;\ntests[\"Check result id\"] = res.data.id === \"477181792361674_1490828694330307\";\ntests[\"Response has type\"] = res.data.type !== undefined;\ntests[\"Check result type\"] = res.data.type === \"photo\";\ntests[\"Response has message\"] = res.data.message !== undefined;\ntests[\"Check result message\"] = res.data.message.length > 10;\ntests[\"Response has created time\"] = res.data.created_time !== undefined;\ntests[\"Response has likes\"] = res.data.likes !== undefined;\ntests[\"Check result likes type\"] = typeof(res.data.likes) === \"number\";\ntests[\"Check result likes value\"] = res.data.likes > 0;\ntests[\"Post has comments\"] = res.data.comments !== undefined;\ntests[\"Check result commnets type\"] = typeof(res.data.comments) === \"number\";\ntests[\"Check result commnets value\"] = res.data.comments > 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 1;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 200;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"OK\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"d479ff54-4c54-4aaa-ac81-a21e05eb2b68",
+      "name":"Unknown Page Stat",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,namme",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,namme",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"40741a0a-dbcd-4ed9-a964-600ee068bd0a",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Unknown statistic: `namme`\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Unknown statistic: `namme`\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"d8747403-d2cb-4230-94ec-a08d503c8b47",
+      "name":"Missing Endpoint 2",
+      "url":"{{base_url}}\/api",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"7b0a3ec3-af5c-4b96-bfe7-609c26f459da",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 0;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"No endpoint specified\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 0;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"No endpoint specified\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"dc2f7182-606c-46f0-9bca-baab3f5566d4",
+      "name":"Duplicate Posts Stat",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,name,posts,posts,category,posts",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,name,posts,posts,category,posts",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"4150ec62-d3c8-43aa-bcaa-222870d1ecb3",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Statistic `posts` specified more than once (not allowed since version 2)\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Statistic `posts` specified more than once (not allowed since version 2)\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"dc7a053f-2ee6-479f-92a3-4eb94c29f946",
+      "name":"Valid Date Params",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=posts,id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"posts,id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2015-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2015-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"0d25c630-2122-4619-98ef-33da2670a65e",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.id !== undefined;",
+              "tests[\"Check result id\"] = res.data.id === \"20531316728\";",
+              "tests[\"Response has name\"] = res.data.name !== undefined;",
+              "tests[\"Check result name\"] = res.data.name === \"Facebook\";",
+              "tests[\"Response does not have website\"] = res.data.website === undefined;",
+              "tests[\"Response does not have category\"] = res.data.category === undefined;",
+              "tests[\"Response does not have fan count\"] = res.data.fan_count === undefined;",
+              "tests[\"Response has posts\"] = res.data.posts !== undefined;",
+              "tests[\"Check result posts\"] = res.data.posts.length > 0;",
+              "",
+              "\/\/validate post results",
+              "res.data.posts.forEach(function(post) {",
+              "  tests[\"Post has id\"] = post.id !== undefined;",
+              "  tests[\"Post has type\"] = post.type !== undefined;",
+              "  tests[\"Post has message\"] = post.message !== undefined;",
+              "  if (post.message !== undefined) {",
+              "    \/\/do not check message if not present (e.g. message not present for some types of posts)",
+              "    tests[\"Check result message\"] = post.message.length > 10;",
+              "  }",
+              "  tests[\"Post has created time\"] = post.created_time !== undefined;",
+              "  time = new Date(Date.parse(post.created_time)).getTime();",
+              "  start = new Date(Date.parse(\"2015-10-01T08:45:10.295Z\")).getTime();",
+              "  end = new Date(Date.parse(\"2015-11-01T19:37:12.193Z\")).getTime();",
+              "  tests[\"Check result created time\"] = time >= start && time <= end;",
+              "  tests[\"Post has likes\"] = post.likes !== undefined;",
+              "  tests[\"Check result likes type\"] = typeof(post.likes) === \"number\";",
+              "  tests[\"Check result likes value\"] = post.likes > 0;",
+              "  tests[\"Post has comments\"] = post.comments !== undefined;",
+              "  tests[\"Check result commnets type\"] = typeof(post.comments) === \"number\";",
+              "  tests[\"Check result commnets value\"] = post.comments > 0;",
+              "});",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 200;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"OK\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.id !== undefined;\ntests[\"Check result id\"] = res.data.id === \"20531316728\";\ntests[\"Response has name\"] = res.data.name !== undefined;\ntests[\"Check result name\"] = res.data.name === \"Facebook\";\ntests[\"Response does not have website\"] = res.data.website === undefined;\ntests[\"Response does not have category\"] = res.data.category === undefined;\ntests[\"Response does not have fan count\"] = res.data.fan_count === undefined;\ntests[\"Response has posts\"] = res.data.posts !== undefined;\ntests[\"Check result posts\"] = res.data.posts.length > 0;\n\n\/\/validate post results\nres.data.posts.forEach(function(post) {\n  tests[\"Post has id\"] = post.id !== undefined;\n  tests[\"Post has type\"] = post.type !== undefined;\n  tests[\"Post has message\"] = post.message !== undefined;\n  if (post.message !== undefined) {\n    \/\/do not check message if not present (e.g. message not present for some types of posts)\n    tests[\"Check result message\"] = post.message.length > 10;\n  }\n  tests[\"Post has created time\"] = post.created_time !== undefined;\n  time = new Date(Date.parse(post.created_time)).getTime();\n  start = new Date(Date.parse(\"2015-10-01T08:45:10.295Z\")).getTime();\n  end = new Date(Date.parse(\"2015-11-01T19:37:12.193Z\")).getTime();\n  tests[\"Check result created time\"] = time >= start && time <= end;\n  tests[\"Post has likes\"] = post.likes !== undefined;\n  tests[\"Check result likes type\"] = typeof(post.likes) === \"number\";\n  tests[\"Check result likes value\"] = post.likes > 0;\n  tests[\"Post has comments\"] = post.comments !== undefined;\n  tests[\"Check result commnets type\"] = typeof(post.comments) === \"number\";\n  tests[\"Check result commnets value\"] = post.comments > 0;\n});\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 4;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 200;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"OK\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"e9cc283b-acaf-4a7c-aec7-26cb004a3fb5",
+      "name":"Malformed Posts Stats",
+      "url":"{{url}}\/facebook?statistics=posts{,,},category&access_token={{access_token}}",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"statistics",
+          "value":"posts{,,},category",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"e29103ed-08cb-4ec0-a38b-5e486826a838",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Unknown statistic: `posts{,,}`\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 2;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Unknown statistic: `posts{,,}`\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"f949cec9-c227-44e0-a136-55e40bfa0b5e",
+      "name":"Facebook Page",
+      "url":"{{url}}\/facebook?access_token={{access_token}}",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"81d5abe9-6ad6-4238-a34f-d4ea04691803",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 10000; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.id !== undefined;",
+              "tests[\"Check result id\"] = res.data.id === \"20531316728\";",
+              "tests[\"Response has name\"] = res.data.name !== undefined;",
+              "tests[\"Check result name\"] = res.data.name === \"Facebook\";",
+              "tests[\"Response has website\"] = res.data.website !== undefined;",
+              "tests[\"Check result website type\"] = typeof(res.data.website) === \"string\";",
+              "tests[\"Check result website format\"] = res.data.website.startsWith(\"https:\/\/\") || res.data.website.startsWith(\"http:\/\/\");",
+              "tests[\"Check result website length\"] = res.data.website.length > 10;",
+              "tests[\"Response has category\"] = res.data.category !== undefined;",
+              "tests[\"Check result category type\"] = typeof(res.data.category) === \"string\";",
+              "tests[\"Check result category value\"] = res.data.category === \"Website\";",
+              "tests[\"Response has fan count\"] = res.data.fan_count !== undefined;",
+              "tests[\"Check result fan count type\"] = typeof(res.data.fan_count) === \"number\";",
+              "tests[\"Check result fan count value\"] = res.data.fan_count > 0;",
+              "tests[\"Response has posts\"] = res.data.posts !== undefined;",
+              "tests[\"Check result posts\"] = res.data.posts.length > 0;",
+              "",
+              "\/\/validate post results",
+              "res.data.posts.forEach(function(post) {",
+              "  tests[\"Post has id\"] = post.id !== undefined;",
+              "  tests[\"Post has type\"] = post.type !== undefined;",
+              "  tests[\"Post has message\"] = post.message !== undefined;",
+              "  if (post.message !== undefined) {",
+              "    \/\/do not check message if not present (e.g. message not present for some types of posts)",
+              "    tests[\"Check result message\"] = post.message.length > 10;",
+              "  }",
+              "  tests[\"Post has created time\"] = post.created_time !== undefined;",
+              "  tests[\"Post has likes\"] = post.likes !== undefined;",
+              "  tests[\"Check result likes type\"] = typeof(post.likes) === \"number\";",
+              "  tests[\"Check result likes value\"] = post.likes > 0;",
+              "  tests[\"Post has comments\"] = post.comments !== undefined;",
+              "  tests[\"Check result commnets type\"] = typeof(post.comments) === \"number\";",
+              "  tests[\"Check result commnets value\"] = post.comments > 0;",
+              "});",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 1;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 200;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"OK\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 10000; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.id !== undefined;\ntests[\"Check result id\"] = res.data.id === \"20531316728\";\ntests[\"Response has name\"] = res.data.name !== undefined;\ntests[\"Check result name\"] = res.data.name === \"Facebook\";\ntests[\"Response has website\"] = res.data.website !== undefined;\ntests[\"Check result website type\"] = typeof(res.data.website) === \"string\";\ntests[\"Check result website format\"] = res.data.website.startsWith(\"https:\/\/\") || res.data.website.startsWith(\"http:\/\/\");\ntests[\"Check result website length\"] = res.data.website.length > 10;\ntests[\"Response has category\"] = res.data.category !== undefined;\ntests[\"Check result category type\"] = typeof(res.data.category) === \"string\";\ntests[\"Check result category value\"] = res.data.category === \"Website\";\ntests[\"Response has fan count\"] = res.data.fan_count !== undefined;\ntests[\"Check result fan count type\"] = typeof(res.data.fan_count) === \"number\";\ntests[\"Check result fan count value\"] = res.data.fan_count > 0;\ntests[\"Response has posts\"] = res.data.posts !== undefined;\ntests[\"Check result posts\"] = res.data.posts.length > 0;\n\n\/\/validate post results\nres.data.posts.forEach(function(post) {\n  tests[\"Post has id\"] = post.id !== undefined;\n  tests[\"Post has type\"] = post.type !== undefined;\n  tests[\"Post has message\"] = post.message !== undefined;\n  if (post.message !== undefined) {\n    \/\/do not check message if not present (e.g. message not present for some types of posts)\n    tests[\"Check result message\"] = post.message.length > 10;\n  }\n  tests[\"Post has created time\"] = post.created_time !== undefined;\n  tests[\"Post has likes\"] = post.likes !== undefined;\n  tests[\"Check result likes type\"] = typeof(post.likes) === \"number\";\n  tests[\"Check result likes value\"] = post.likes > 0;\n  tests[\"Post has comments\"] = post.comments !== undefined;\n  tests[\"Check result commnets type\"] = typeof(post.comments) === \"number\";\n  tests[\"Check result commnets value\"] = post.comments > 0;\n});\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 1;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 200;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"OK\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"ff040042-d02d-43a9-b342-91ba73eac158",
+      "name":"Invalid Date Params",
+      "url":"{{url}}\/facebook?access_token={{access_token}}&statistics=id,name&start_date=bla&end_date=bla",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"access_token",
+          "value":"{{access_token}}",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"statistics",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"bla",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"bla",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"d488467d-9806-428f-ac19-ceea16c44ae8",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = res.data.length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.dev_team !== undefined;",
+              "tests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";",
+              "tests[\"Response has version info\"] = res.version !== undefined;",
+              "tests[\"Response has start time\"] = res.start_time !== undefined;",
+              "tests[\"Response has end time\"] = res.end_time !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;",
+              "tests[\"Response has params\"] = res.params !== undefined;",
+              "if (res.params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.status !== undefined;",
+              "tests[\"Check status code\"] = res.status === 400;",
+              "tests[\"Response has status text\"] = res.status_text !== undefined;",
+              "tests[\"Check status text\"] = res.status_text === \"Invalid date parameters\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = res.data.length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.dev_team !== undefined;\ntests[\"Check dev team\"] = res.dev_team === \"Team Unassigned\";\ntests[\"Response has version info\"] = res.version !== undefined;\ntests[\"Response has start time\"] = res.start_time !== undefined;\ntests[\"Response has end time\"] = res.end_time !== undefined;\ntests[\"Response has elapsed time\"] = res.time_elapsed !== undefined;\ntests[\"Response has params\"] = res.params !== undefined;\nif (res.params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.params).length === 4;\n}\ntests[\"Response has status code\"] = res.status !== undefined;\ntests[\"Check status code\"] = res.status === 400;\ntests[\"Response has status text\"] = res.status_text !== undefined;\ntests[\"Check status text\"] = res.status_text === \"Invalid date parameters\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"abb95a40-53d0-4fff-bd95-0fc7f1efb3e6",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    }
+  ]
+}

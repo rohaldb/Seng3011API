@@ -1,0 +1,401 @@
+newman
+
+API Tests - Moose Version
+
+→ Facebook Page
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [200 OK, 5.59KB, 1542ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response has website
+  ✓  Check result website type
+  ✓  Check result website format
+  ✓  Check result website length
+  ✓  Response has category
+  ✓  Check result category type
+  ✓  Check result category value
+  ✓  Response has fan count
+  ✓  Check result fan count type
+  ✓  Check result fan count value
+  ✓  Response has posts
+  ✓  Check result posts
+  1. Post has id
+  ✓  Post has type
+  ✓  Post has message
+  ✓  Check result message
+  ✓  Post has created time
+  ✓  Post has likes
+  ✓  Check result likes type
+  ✓  Check result likes value
+  ✓  Post has comments
+  ✓  Check result commnets type
+  ✓  Check result commnets value
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  2. Response has status code
+  3. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Page Stats Specified
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [200 OK, 929B, 1071ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response does not have website
+  ✓  Response does not have category
+  ✓  Response does not have fan count
+  ✓  Response does not have posts
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  4. Response has status code
+  5. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Valid Date Params
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name,post_message,post_type,post_created_time,post_like_count,post_comment_count,id,post_type,id&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z [200 OK, 3.94KB, 1021ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response does not have website
+  ✓  Response does not have category
+  ✓  Response does not have fan count
+  ✓  Response has posts
+  ✓  Check result posts
+  6. Post has id
+  ✓  Post has type
+  ✓  Post has message
+  ✓  Check result message
+  ✓  Post has created time
+  ✓  Check result created time
+  ✓  Post has likes
+  ✓  Check result likes type
+  ✓  Check result likes value
+  ✓  Post has comments
+  ✓  Check result commnets type
+  ✓  Check result commnets value
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  7. Response has status code
+  8. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Invalid Date Params
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commwealthbank&stats=id,name&start_date=bla&end_date=bla [400 BAD REQUEST, 629B, 254ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  9. Check params
+ 10. Response has status code
+ 11. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Unknown Company
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=hello-world&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [400 BAD REQUEST, 709B, 249ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+ 12. Check params
+ 13. Response has status code
+ 14. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Unknown Page Stat
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,namme&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [400 BAD REQUEST, 755B, 1966ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+ 15. Check params
+ 16. Response has status code
+ 17. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Invalid Date Range
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z [400 BAD REQUEST, 608B, 248ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+ 18. Check params
+ 19. Response has status code
+ 20. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Duplicate Company Stat
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [200 OK, 946B, 1123ms]
+ 21. Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+ 22. Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+ 23. Check params
+ 24. Response has status code
+ 25. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Malformed Company Stats
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z [400 BAD REQUEST, 750B, 1129ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+ 26. Check params
+ 27. Response has status code
+ 28. Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Missing Endpoint
+  GET http://seng3011-moose.herokuapp.com/v3/ [404 NOT FOUND, 439B, 245ms]
+ 29. Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+ 30. Content-type is application/json
+ 31⠄ JSONError in test-script
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │   failed │
+├─────────────────────────┼──────────┼──────────┤
+│              iterations │        1 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│                requests │       10 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│            test-scripts │       10 │        1 │
+├─────────────────────────┼──────────┼──────────┤
+│      prerequest-scripts │        0 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│              assertions │      219 │       30 │
+├─────────────────────────┴──────────┴──────────┤
+│ total run duration: 9.2s                      │
+├───────────────────────────────────────────────┤
+│ total data received: 13.1KB (approx)          │
+├───────────────────────────────────────────────┤
+│ average response time: 884ms                  │
+└───────────────────────────────────────────────┘
+
+   #  failure         detail                                                  
+                                                                              
+ 01.  AssertionError  expected false to be truthy                             
+                      at assertion:21 in test-script                          
+                      inside "Facebook Page"                                  
+                                                                              
+ 02.  AssertionError  expected false to be truthy                             
+                      at assertion:40 in test-script                          
+                      inside "Facebook Page"                                  
+                                                                              
+ 03.  AssertionError  expected false to be truthy                             
+                      at assertion:41 in test-script                          
+                      inside "Facebook Page"                                  
+                                                                              
+ 04.  AssertionError  expected false to be truthy                             
+                      at assertion:21 in test-script                          
+                      inside "Page Stats Specified"                           
+                                                                              
+ 05.  AssertionError  expected false to be truthy                             
+                      at assertion:22 in test-script                          
+                      inside "Page Stats Specified"                           
+                                                                              
+ 06.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Valid Date Params"                              
+                                                                              
+ 07.  AssertionError  expected false to be truthy                             
+                      at assertion:34 in test-script                          
+                      inside "Valid Date Params"                              
+                                                                              
+ 08.  AssertionError  expected false to be truthy                             
+                      at assertion:35 in test-script                          
+                      inside "Valid Date Params"                              
+                                                                              
+ 09.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Invalid Date Params"                            
+                                                                              
+ 10.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Invalid Date Params"                            
+                                                                              
+ 11.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Invalid Date Params"                            
+                                                                              
+ 12.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Unknown Company"                                
+                                                                              
+ 13.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Unknown Company"                                
+                                                                              
+ 14.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Unknown Company"                                
+                                                                              
+ 15.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Unknown Page Stat"                              
+                                                                              
+ 16.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Unknown Page Stat"                              
+                                                                              
+ 17.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Unknown Page Stat"                              
+                                                                              
+ 18.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Invalid Date Range"                             
+                                                                              
+ 19.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Invalid Date Range"                             
+                                                                              
+ 20.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Invalid Date Range"                             
+                                                                              
+ 21.  AssertionError  expected false to be truthy                             
+                      at assertion:0 in test-script                           
+                      inside "Duplicate Company Stat"                         
+                                                                              
+ 22.  AssertionError  expected false to be truthy                             
+                      at assertion:5 in test-script                           
+                      inside "Duplicate Company Stat"                         
+                                                                              
+ 23.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Duplicate Company Stat"                         
+                                                                              
+ 24.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Duplicate Company Stat"                         
+                                                                              
+ 25.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Duplicate Company Stat"                         
+                                                                              
+ 26.  AssertionError  expected false to be truthy                             
+                      at assertion:13 in test-script                          
+                      inside "Malformed Company Stats"                        
+                                                                              
+ 27.  AssertionError  expected false to be truthy                             
+                      at assertion:14 in test-script                          
+                      inside "Malformed Company Stats"                        
+                                                                              
+ 28.  AssertionError  expected false to be truthy                             
+                      at assertion:15 in test-script                          
+                      inside "Malformed Company Stats"                        
+                                                                              
+ 29.  AssertionError  expected false to be truthy                             
+                      at assertion:0 in test-script                           
+                      inside "Missing Endpoint"                               
+                                                                              
+ 30.  AssertionError  expected false to be truthy                             
+                      at assertion:3 in test-script                           
+                      inside "Missing Endpoint"                               
+                                                                              
+ 31.  JSONError       Unexpected token '<' at 1:1                             
+                      <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"> 
+                      ^                                                       
+                      at test-script                                          
+                      inside "Missing Endpoint"                               

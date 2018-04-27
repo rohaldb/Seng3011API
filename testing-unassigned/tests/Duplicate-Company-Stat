@@ -1,0 +1,28 @@
+//validate headers
+tests["Status code is 400"] = responseCode.code === 400;
+tests["Response time is acceptable"] = responseTime < 2500; //milliseconds
+tests["Content-type header is set"] = postman.getResponseHeader("Content-Type");
+tests["Content-type is application/json"] = responseHeaders["Content-Type"].has("application/json");
+
+//validate response
+var res = JSON.parse(responseBody);
+tests["Response has data"] = res.data !== undefined;
+tests["Response has empty data"] = res.data.length === 0;
+
+//validate metadata
+tests["Response has dev team"] = res.dev_team !== undefined;
+tests["Check dev team"] = res.dev_team === "Team Unassigned";
+tests["Response has version info"] = res.version !== undefined;
+tests["Response has start time"] = res.start_time !== undefined;
+tests["Response has end time"] = res.end_time !== undefined;
+tests["Response has elapsed time"] = res.time_elapsed !== undefined;
+tests["Response has params"] = res.params !== undefined;
+if (res.params === null) {
+  tests["Check params"] = "Expected params" === "Received null"
+} else {
+  tests["Check params"] = Object.keys(res.params).length === 2;
+}
+tests["Response has status code"] = res.status !== undefined;
+tests["Check status code"] = res.status === 400;
+tests["Response has status text"] = res.status_text !== undefined;
+tests["Check status text"] = res.status_text === "Statistic `name` specified more than once (not allowed since version 2)";

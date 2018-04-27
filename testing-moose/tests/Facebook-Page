@@ -1,0 +1,61 @@
+//validate headers
+tests["Status code is 200"] = responseCode.code === 200;
+tests["Response time is acceptable"] = responseTime < 10000; //milliseconds
+tests["Content-type header is set"] = postman.getResponseHeader("Content-Type");
+tests["Content-type is application/json"] = responseHeaders["Content-Type"].has("application/json");
+
+//validate response
+var res = JSON.parse(responseBody);
+tests["Response has data"] = res.data !== undefined;
+tests["Response has id"] = res.data.pageID !== undefined;
+tests["Check result id"] = res.data.pageID === "120184674661521";
+tests["Response has name"] = res.data.companyNames !== undefined;
+tests["Check result name"] = res.data.companyNames === "Commonwealth Bank";
+tests["Response has website"] = res.data.website !== undefined;
+tests["Check result website type"] = typeof(res.data.website) === "string";
+tests["Check result website format"] = res.data.website.startsWith("https://") || res.data.website.startsWith("http://");
+tests["Check result website length"] = res.data.website.length > 10;
+tests["Response has category"] = res.data.category !== undefined;
+tests["Check result category type"] = typeof(res.data.category) === "string";
+tests["Check result category value"] = res.data.category === "Finance Company";
+tests["Response has fan count"] = res.data.fan_count !== undefined;
+tests["Check result fan count type"] = typeof(res.data.fan_count) === "number";
+tests["Check result fan count value"] = res.data.fan_count > 0;
+tests["Response has posts"] = res.data.posts !== undefined;
+tests["Check result posts"] = res.data.posts.length > 0;
+
+//validate post results
+res.data.posts.forEach(function(post) {
+  tests["Post has id"] = post.id !== undefined;
+  tests["Post has type"] = post.post_type !== undefined;
+  tests["Post has message"] = post.post_message !== undefined;
+  if (post.post_message !== undefined) {
+    //do not check message if not present (e.g. message not present for some types of posts)
+    tests["Check result message"] = post.post_message.length > 10;
+  }
+  tests["Post has created time"] = post.post_created_time !== undefined;
+  tests["Post has likes"] = post.post_like_count !== undefined;
+  tests["Check result likes type"] = typeof(post.post_like_count) === "number";
+  tests["Check result likes value"] = post.post_like_count > 0;
+  tests["Post has comments"] = post.post_comment_count !== undefined;
+  tests["Check result commnets type"] = typeof(post.post_comment_count) === "number";
+  tests["Check result commnets value"] = post.post_comment_count > 0;
+});
+
+//validate metadata
+tests["Response has dev team"] = res.log.developer !== undefined;
+tests["Check dev team"] = res.log.developer === "Team Moose";
+tests["Response has version info"] = res.log.version !== undefined;
+tests["Response has start time"] = res.log.execution_start !== undefined;
+tests["Response has end time"] = res.log.execution_end !== undefined;
+tests["Response has elapsed time"] = res.log.execution_duration !== undefined;
+tests["Response has params"] = res.log.request_params !== undefined;
+if (res.log.request_params === null) {
+  tests["Check params"] = "Expected params" === "Received null"
+} else {
+  tests["Check params"] = Object.keys(res.log.request_params).length === 4;
+}
+tests["Response has status code"] = res.log.status !== undefined;
+tests["Check status code"] = res.log.status === 200;
+tests["Response has status text"] = res.log.message !== undefined;
+tests["Check status text"] = res.log.message === "Successfully returned API results";

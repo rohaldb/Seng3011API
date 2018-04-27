@@ -1,0 +1,39 @@
+→ Facebook Page
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # This query should succeed and return all default page statistics
+
+→ Page Stats Specified
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # This query should succeed and return only the statistics requested
+
+→ Valid Date Params
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name,post_message,post_type,post_created_time,post_like_count,post_comment_count,id,post_type,id&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z
+  # This query should succeed and return the name and id of the company as well as posts within the specified date range only
+
+→ Invalid Date Params
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commwealthbank&stats=id,name&start_date=bla&end_date=bla
+  # Malformed dates are not permitted
+
+→ Unknown Company
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=hello-world&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # Only certain companies are supported, all others result in an error
+
+→ Unknown Page Stat
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,namme&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # An unknown page statistic results in an error being reported
+
+→ Invalid Date Range
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z
+  # The start date must precede the end date
+
+→ Duplicate Company Stat
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,name,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # Duplicate statistics are not allowed (name specified more than once)
+
+→ Malformed Company Stats
+  GET http://seng3011-moose.herokuapp.com/v3/company?id=commonwealthbank&stats=id,,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z
+  # Empty statistics, i.e. multiple sequential commas are not permitted
+
+→ Missing Endpoint
+  GET http://seng3011-moose.herokuapp.com/v3/
+  # If no endpoint is specified, the API fails gracefully with a 400 error

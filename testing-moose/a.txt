@@ -1,0 +1,63 @@
+→ Facebook Page
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>
+  # This query should succeed and return all default page statistics
+
+→ Post Query
+  GET https://unassigned-api.herokuapp.com/api//post/477181792361674_1490828694330307?access_token=<...>
+  # This query should succeed and return all default post statistics
+
+→ Page Stats Specified
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,name
+  # This query should succeed and return only the statistics requested
+
+→ Valid Date Params
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=posts,id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z
+  # This query should succeed and return the name and id of the company as well as posts within the specified date range only
+
+→ Invalid Date Params
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,name&start_date=bla&end_date=bla
+  # Malformed dates are not permitted
+
+→ Unknown Company
+  GET https://unassigned-api.herokuapp.com/api//hello-world?access_token=<...>
+  # Only certain companies are supported, all others result in an error
+
+→ Invalid Date Range
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z
+  # The start date must precede the end date
+
+→ Unknown Page Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,namme
+  # An unknown page statistic results in an error being reported
+
+→ Duplicate Company Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,name,name
+  # Duplicate statistics are not allowed (name specified more than once)
+
+→ Malformed Company Stats
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=id,,name&access_token=<...>
+  # Empty statistics, i.e. multiple sequential commas are not permitted
+
+→ Malformed Posts Stats
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=posts{,,},category&access_token=<...>
+  # Empty statistics, i.e. multiple sequential commas are not permitted
+
+→ Duplicate Posts Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=<...>&statistics=id,name,posts,posts,category,posts
+  # Duplicate statistics are not allowed (this time with posts specified more than once)
+
+→ Missing Access Token
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistic=bla
+  # Access token is required
+
+→ Invalid or Expired Access Token
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=website,name&access_token=this-is-a-fake-access-token-or-equivalently-an-access-token-that-has-expired
+  # An expired access token or invalid access token will result in a 400 error
+
+→ Missing Endpoint 1
+  GET https://unassigned-api.herokuapp.com/
+  # If no endpoint is specified, the API fails gracefully with a 400 error
+
+→ Missing Endpoint 2
+  GET https://unassigned-api.herokuapp.com/api
+  # If no endpoint is specified, the API fails gracefully with a 400 error

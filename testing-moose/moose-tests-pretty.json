@@ -1,0 +1,1012 @@
+{
+  "id":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+  "name":"API Tests - Moose Version",
+  "description":null,
+  "auth":null,
+  "events":null,
+  "variables":null,
+  "order":[
+    "4786c78b-a3a2-47fd-8c67-ada9c239e9f5",
+    "f4cb5b8d-a3ca-4c74-9037-7529898bd1de",
+    "34404c39-3643-4dec-aae0-bea75ecfbd18",
+    "2aefc202-3039-40b7-9530-69630cd67125",
+    "8cbd8406-ca29-4392-935b-0ff7aa6df7b6",
+    "542e3b89-e84e-469b-a371-2fa66caf4769",
+    "8851c895-318f-4b4c-a01d-1a4755e31ab4",
+    "17de1cec-550d-4fa8-b51c-60483badeeda",
+    "7fb88e00-875c-4125-8278-c09f116375a4",
+    "a6bd2b85-6d6a-4770-94b8-3d254fe81e7b"
+  ],
+  "folders_order":[
+
+  ],
+  "folders":[
+
+  ],
+  "requests":[
+    {
+      "id":"17de1cec-550d-4fa8-b51c-60483badeeda",
+      "name":"Duplicate Company Stat",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,name,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":null,
+      "data":[
+
+      ],
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,name,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"3dddcc10-b6d8-4872-94b2-f9cbf0961e35",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"2aefc202-3039-40b7-9530-69630cd67125",
+      "name":"Invalid Date Params",
+      "url":"{{url}}\/company?id=commwealthbank&stats=id,name&start_date=bla&end_date=bla",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"bla",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"bla",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"b18f536f-19b2-446b-85c7-72e1d0cf0925",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"34404c39-3643-4dec-aae0-bea75ecfbd18",
+      "name":"Valid Date Params",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,name,post_message,post_type,post_created_time,post_like_count,post_comment_count,id,post_type,id&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,name,post_message,post_type,post_created_time,post_like_count,post_comment_count,id,post_type,id",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2015-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2015-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"9a68e70e-9435-43c3-bd5b-c3d9e0ad98dc",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.pageID !== undefined;",
+              "tests[\"Check result id\"] = res.data.pageID === \"120184674661521\";",
+              "tests[\"Response has name\"] = res.data.companyNames !== undefined;",
+              "tests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";",
+              "tests[\"Response does not have website\"] = res.data.website === undefined;",
+              "tests[\"Response does not have category\"] = res.data.category === undefined;",
+              "tests[\"Response does not have fan count\"] = res.data.fan_count === undefined;",
+              "tests[\"Response has posts\"] = res.data.posts !== undefined;",
+              "tests[\"Check result posts\"] = res.data.posts.length > 0;",
+              "",
+              "\/\/validate post results",
+              "res.data.posts.forEach(function(post) {",
+              "  tests[\"Post has id\"] = post.id !== undefined;",
+              "  tests[\"Post has type\"] = post.post_type !== undefined;",
+              "  tests[\"Post has message\"] = post.post_message !== undefined;",
+              "  if (post.post_message !== undefined) {",
+              "    \/\/do not check message if not present (e.g. message not present for some types of posts)",
+              "    tests[\"Check result message\"] = post.post_message.length > 10;",
+              "  }",
+              "  tests[\"Post has created time\"] = post.post_created_time !== undefined;",
+              "  time = new Date(Date.parse(post.post_created_time)).getTime();",
+              "  start = new Date(Date.parse(\"2015-10-01T08:45:10.295Z\")).getTime();",
+              "  end = new Date(Date.parse(\"2015-11-01T19:37:12.193Z\")).getTime();",
+              "  tests[\"Check result created time\"] = time >= start && time <= end;",
+              "  tests[\"Post has likes\"] = post.post_like_count !== undefined;",
+              "  tests[\"Check result likes type\"] = typeof(post.post_like_count) === \"number\";",
+              "  tests[\"Check result likes value\"] = post.post_like_count > 0;",
+              "  tests[\"Post has comments\"] = post.post_comment_count !== undefined;",
+              "  tests[\"Check result commnets type\"] = typeof(post.post_comment_count) === \"number\";",
+              "  tests[\"Check result commnets value\"] = post.post_comment_count > 0;",
+              "});",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 200;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.pageID !== undefined;\ntests[\"Check result id\"] = res.data.pageID === \"120184674661521\";\ntests[\"Response has name\"] = res.data.companyNames !== undefined;\ntests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";\ntests[\"Response does not have website\"] = res.data.website === undefined;\ntests[\"Response does not have category\"] = res.data.category === undefined;\ntests[\"Response does not have fan count\"] = res.data.fan_count === undefined;\ntests[\"Response has posts\"] = res.data.posts !== undefined;\ntests[\"Check result posts\"] = res.data.posts.length > 0;\n\n\/\/validate post results\nres.data.posts.forEach(function(post) {\n  tests[\"Post has id\"] = post.id !== undefined;\n  tests[\"Post has type\"] = post.post_type !== undefined;\n  tests[\"Post has message\"] = post.post_message !== undefined;\n  if (post.post_message !== undefined) {\n    \/\/do not check message if not present (e.g. message not present for some types of posts)\n    tests[\"Check result message\"] = post.post_message.length > 10;\n  }\n  tests[\"Post has created time\"] = post.post_created_time !== undefined;\n  time = new Date(Date.parse(post.post_created_time)).getTime();\n  start = new Date(Date.parse(\"2015-10-01T08:45:10.295Z\")).getTime();\n  end = new Date(Date.parse(\"2015-11-01T19:37:12.193Z\")).getTime();\n  tests[\"Check result created time\"] = time >= start && time <= end;\n  tests[\"Post has likes\"] = post.post_like_count !== undefined;\n  tests[\"Check result likes type\"] = typeof(post.post_like_count) === \"number\";\n  tests[\"Check result likes value\"] = post.post_like_count > 0;\n  tests[\"Post has comments\"] = post.post_comment_count !== undefined;\n  tests[\"Check result commnets type\"] = typeof(post.post_comment_count) === \"number\";\n  tests[\"Check result commnets value\"] = post.post_comment_count > 0;\n});\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 200;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"4786c78b-a3a2-47fd-8c67-ada9c239e9f5",
+      "name":"Facebook Page",
+      "url":"{{url}}\/company?id=commonwealthbank&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"f7ffbace-ba4b-4ced-8da6-1fe44dd7ff1b",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 10000; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.pageID !== undefined;",
+              "tests[\"Check result id\"] = res.data.pageID === \"120184674661521\";",
+              "tests[\"Response has name\"] = res.data.companyNames !== undefined;",
+              "tests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";",
+              "tests[\"Response has website\"] = res.data.website !== undefined;",
+              "tests[\"Check result website type\"] = typeof(res.data.website) === \"string\";",
+              "tests[\"Check result website format\"] = res.data.website.startsWith(\"https:\/\/\") || res.data.website.startsWith(\"http:\/\/\");",
+              "tests[\"Check result website length\"] = res.data.website.length > 10;",
+              "tests[\"Response has category\"] = res.data.category !== undefined;",
+              "tests[\"Check result category type\"] = typeof(res.data.category) === \"string\";",
+              "tests[\"Check result category value\"] = res.data.category === \"Finance Company\";",
+              "tests[\"Response has fan count\"] = res.data.fan_count !== undefined;",
+              "tests[\"Check result fan count type\"] = typeof(res.data.fan_count) === \"number\";",
+              "tests[\"Check result fan count value\"] = res.data.fan_count > 0;",
+              "tests[\"Response has posts\"] = res.data.posts !== undefined;",
+              "tests[\"Check result posts\"] = res.data.posts.length > 0;",
+              "",
+              "\/\/validate post results",
+              "res.data.posts.forEach(function(post) {",
+              "  tests[\"Post has id\"] = post.id !== undefined;",
+              "  tests[\"Post has type\"] = post.post_type !== undefined;",
+              "  tests[\"Post has message\"] = post.post_message !== undefined;",
+              "  if (post.post_message !== undefined) {",
+              "    \/\/do not check message if not present (e.g. message not present for some types of posts)",
+              "    tests[\"Check result message\"] = post.post_message.length > 10;",
+              "  }",
+              "  tests[\"Post has created time\"] = post.post_created_time !== undefined;",
+              "  tests[\"Post has likes\"] = post.post_like_count !== undefined;",
+              "  tests[\"Check result likes type\"] = typeof(post.post_like_count) === \"number\";",
+              "  tests[\"Check result likes value\"] = post.post_like_count > 0;",
+              "  tests[\"Post has comments\"] = post.post_comment_count !== undefined;",
+              "  tests[\"Check result commnets type\"] = typeof(post.post_comment_count) === \"number\";",
+              "  tests[\"Check result commnets value\"] = post.post_comment_count > 0;",
+              "});",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 200;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 10000; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.pageID !== undefined;\ntests[\"Check result id\"] = res.data.pageID === \"120184674661521\";\ntests[\"Response has name\"] = res.data.companyNames !== undefined;\ntests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";\ntests[\"Response has website\"] = res.data.website !== undefined;\ntests[\"Check result website type\"] = typeof(res.data.website) === \"string\";\ntests[\"Check result website format\"] = res.data.website.startsWith(\"https:\/\/\") || res.data.website.startsWith(\"http:\/\/\");\ntests[\"Check result website length\"] = res.data.website.length > 10;\ntests[\"Response has category\"] = res.data.category !== undefined;\ntests[\"Check result category type\"] = typeof(res.data.category) === \"string\";\ntests[\"Check result category value\"] = res.data.category === \"Finance Company\";\ntests[\"Response has fan count\"] = res.data.fan_count !== undefined;\ntests[\"Check result fan count type\"] = typeof(res.data.fan_count) === \"number\";\ntests[\"Check result fan count value\"] = res.data.fan_count > 0;\ntests[\"Response has posts\"] = res.data.posts !== undefined;\ntests[\"Check result posts\"] = res.data.posts.length > 0;\n\n\/\/validate post results\nres.data.posts.forEach(function(post) {\n  tests[\"Post has id\"] = post.id !== undefined;\n  tests[\"Post has type\"] = post.post_type !== undefined;\n  tests[\"Post has message\"] = post.post_message !== undefined;\n  if (post.post_message !== undefined) {\n    \/\/do not check message if not present (e.g. message not present for some types of posts)\n    tests[\"Check result message\"] = post.post_message.length > 10;\n  }\n  tests[\"Post has created time\"] = post.post_created_time !== undefined;\n  tests[\"Post has likes\"] = post.post_like_count !== undefined;\n  tests[\"Check result likes type\"] = typeof(post.post_like_count) === \"number\";\n  tests[\"Check result likes value\"] = post.post_like_count > 0;\n  tests[\"Post has comments\"] = post.post_comment_count !== undefined;\n  tests[\"Check result commnets type\"] = typeof(post.post_comment_count) === \"number\";\n  tests[\"Check result commnets value\"] = post.post_comment_count > 0;\n});\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 200;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"542e3b89-e84e-469b-a371-2fa66caf4769",
+      "name":"Unknown Page Stat",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,namme&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,namme",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"748d453f-9c92-49cb-9692-35c671359040",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"7fb88e00-875c-4125-8278-c09f116375a4",
+      "name":"Malformed Company Stats",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"8006ba60-8015-4539-8c65-8cbff6e80f57",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"8851c895-318f-4b4c-a01d-1a4755e31ab4",
+      "name":"Invalid Date Range",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2015-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2015-09-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"25f17539-219e-43fa-b2fe-8ad901ab4c78",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 3;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 3;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"8cbd8406-ca29-4392-935b-0ff7aa6df7b6",
+      "name":"Unknown Company",
+      "url":"{{url}}\/company?id=hello-world&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"hello-world",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"218199e4-1208-42c2-bf4b-6bdcc7a8d751",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\n\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"a6bd2b85-6d6a-4770-94b8-3d254fe81e7b",
+      "name":"Missing Endpoint",
+      "url":"{{url}}\/",
+      "description":"",
+      "data":[
+
+      ],
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"fb82a12c-ee6f-4234-8e02-36c2abbea8e2",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 400\"] = responseCode.code === 400;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has empty data\"] = Object.keys(res.data).length === 0;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 400;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message.length > 10;"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 400\"] = responseCode.code === 400;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has empty data\"] = Object.keys(res.data).length === 0;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 2;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 400;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message.length > 10;",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    },
+    {
+      "id":"f4cb5b8d-a3ca-4c74-9037-7529898bd1de",
+      "name":"Page Stats Specified",
+      "url":"{{url}}\/company?id=commonwealthbank&stats=id,name&start_date=2017-10-01T08:45:10.295Z&end_date=2017-11-01T19:37:12.193Z",
+      "description":"",
+      "data":null,
+      "dataMode":"params",
+      "headerData":[
+
+      ],
+      "method":"GET",
+      "pathVariableData":[
+
+      ],
+      "queryParams":[
+        {
+          "key":"id",
+          "value":"commonwealthbank",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"stats",
+          "value":"id,name",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"start_date",
+          "value":"2017-10-01T08:45:10.295Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        },
+        {
+          "key":"end_date",
+          "value":"2017-11-01T19:37:12.193Z",
+          "equals":true,
+          "description":"",
+          "enabled":true
+        }
+      ],
+      "auth":null,
+      "events":[
+        {
+          "listen":"test",
+          "script":{
+            "id":"2644d3a7-e02c-43dc-b899-123d50811b2f",
+            "type":"text\/javascript",
+            "exec":[
+              "\/\/validate headers",
+              "tests[\"Status code is 200\"] = responseCode.code === 200;",
+              "tests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds",
+              "tests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");",
+              "tests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");",
+              "",
+              "\/\/validate response",
+              "var res = JSON.parse(responseBody);",
+              "tests[\"Response has data\"] = res.data !== undefined;",
+              "tests[\"Response has id\"] = res.data.pageID !== undefined;",
+              "tests[\"Check result id\"] = res.data.pageID === \"120184674661521\";",
+              "tests[\"Response has name\"] = res.data.companyNames !== undefined;",
+              "tests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";",
+              "tests[\"Response does not have website\"] = res.data.website === undefined;",
+              "tests[\"Response does not have category\"] = res.data.category === undefined;",
+              "tests[\"Response does not have fan count\"] = res.data.fan_count === undefined;",
+              "tests[\"Response does not have posts\"] = res.data.posts === undefined;",
+              "",
+              "\/\/validate metadata",
+              "tests[\"Response has dev team\"] = res.log.developer !== undefined;",
+              "tests[\"Check dev team\"] = res.log.developer === \"Team Moose\";",
+              "tests[\"Response has version info\"] = res.log.version !== undefined;",
+              "tests[\"Response has start time\"] = res.log.execution_start !== undefined;",
+              "tests[\"Response has end time\"] = res.log.execution_end !== undefined;",
+              "tests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;",
+              "tests[\"Response has params\"] = res.log.request_params !== undefined;",
+              "if (res.log.request_params === null) {",
+              "  tests[\"Check params\"] = \"Expected params\" === \"Received null\"",
+              "} else {",
+              "  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;",
+              "}",
+              "tests[\"Response has status code\"] = res.log.status !== undefined;",
+              "tests[\"Check status code\"] = res.log.status === 200;",
+              "tests[\"Response has status text\"] = res.log.message !== undefined;",
+              "tests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";"
+            ]
+          }
+        }
+      ],
+      "folder":null,
+      "preRequestScript":null,
+      "tests":"\/\/validate headers\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Response time is acceptable\"] = responseTime < 2500; \/\/milliseconds\ntests[\"Content-type header is set\"] = postman.getResponseHeader(\"Content-Type\");\ntests[\"Content-type is application\/json\"] = responseHeaders[\"Content-Type\"].has(\"application\/json\");\n\n\/\/validate response\nvar res = JSON.parse(responseBody);\ntests[\"Response has data\"] = res.data !== undefined;\ntests[\"Response has id\"] = res.data.pageID !== undefined;\ntests[\"Check result id\"] = res.data.pageID === \"120184674661521\";\ntests[\"Response has name\"] = res.data.companyNames !== undefined;\ntests[\"Check result name\"] = res.data.companyNames === \"Commonwealth Bank\";\ntests[\"Response does not have website\"] = res.data.website === undefined;\ntests[\"Response does not have category\"] = res.data.category === undefined;\ntests[\"Response does not have fan count\"] = res.data.fan_count === undefined;\ntests[\"Response does not have posts\"] = res.data.posts === undefined;\n\n\/\/validate metadata\ntests[\"Response has dev team\"] = res.log.developer !== undefined;\ntests[\"Check dev team\"] = res.log.developer === \"Team Moose\";\ntests[\"Response has version info\"] = res.log.version !== undefined;\ntests[\"Response has start time\"] = res.log.execution_start !== undefined;\ntests[\"Response has end time\"] = res.log.execution_end !== undefined;\ntests[\"Response has elapsed time\"] = res.log.execution_duration !== undefined;\ntests[\"Response has params\"] = res.log.request_params !== undefined;\nif (res.log.request_params === null) {\n  tests[\"Check params\"] = \"Expected params\" === \"Received null\"\n} else {\n  tests[\"Check params\"] = Object.keys(res.log.request_params).length === 4;\n}\ntests[\"Response has status code\"] = res.log.status !== undefined;\ntests[\"Check status code\"] = res.log.status === 200;\ntests[\"Response has status text\"] = res.log.message !== undefined;\ntests[\"Check status text\"] = res.log.message === \"Successfully returned API results\";",
+      "currentHelper":null,
+      "helperAttributes":null,
+      "collectionId":"ce33effa-4d1b-4b67-b4c6-2c783a685bb8",
+      "headers":"",
+      "pathVariables":[
+
+      ]
+    }
+  ]
+}

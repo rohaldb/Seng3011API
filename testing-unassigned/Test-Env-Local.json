@@ -1,0 +1,27 @@
+{
+  "id": "8cc073a5-a21d-49f0-ae8f-abec16d3179c",
+  "name": "Test-Env-Local",
+  "values": [
+    {
+      "key": "access_token",
+      "value": "EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "url",
+      "value": "localhost:3000/api/",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "base_url",
+      "value": "localhost:3000/",
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2018-04-27T02:08:13.571Z",
+  "_postman_exported_using": "Postman/6.0.10"
+}

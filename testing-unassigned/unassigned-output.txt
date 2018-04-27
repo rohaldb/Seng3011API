@@ -1,0 +1,424 @@
+newman
+
+API Tests
+
+→ Facebook Page
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD [200 OK, 8.52KB, 1031ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response has website
+  ✓  Check result website type
+  ✓  Check result website format
+  ✓  Check result website length
+  ✓  Response has category
+  ✓  Check result category type
+  ✓  Check result category value
+  ✓  Response has fan count
+  ✓  Check result fan count type
+  ✓  Check result fan count value
+  ✓  Response has posts
+  ✓  Check result posts
+  ✓  Post has id
+  ✓  Post has type
+  ✓  Post has message
+  ✓  Check result message
+  ✓  Post has created time
+  ✓  Post has likes
+  ✓  Check result likes type
+  ✓  Check result likes value
+  ✓  Post has comments
+  ✓  Check result commnets type
+  ✓  Check result commnets value
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Post Query
+  GET https://unassigned-api.herokuapp.com/api//post/477181792361674_1490828694330307?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD [200 OK, 1.16KB, 244ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has type
+  ✓  Check result type
+  ✓  Response has message
+  ✓  Check result message
+  ✓  Response has created time
+  ✓  Response has likes
+  ✓  Check result likes type
+  ✓  Check result likes value
+  ✓  Post has comments
+  ✓  Check result commnets type
+  ✓  Check result commnets value
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Page Stats Specified
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,name [200 OK, 846B, 256ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response does not have website
+  ✓  Response does not have category
+  ✓  Response does not have fan count
+  ✓  Response does not have posts
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Valid Date Params
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=posts,id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-11-01T19:37:12.193Z [200 OK, 2.61KB, 253ms]
+  ✓  Status code is 200
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has id
+  ✓  Check result id
+  ✓  Response has name
+  ✓  Check result name
+  ✓  Response does not have website
+  ✓  Response does not have category
+  ✓  Response does not have fan count
+  ✓  Response has posts
+  ✓  Check result posts
+  ✓  Post has id
+  ✓  Post has type
+  ✓  Post has message
+  ✓  Check result message
+  ✓  Post has created time
+  ✓  Check result created time
+  ✓  Post has likes
+  ✓  Check result likes type
+  ✓  Check result likes value
+  ✓  Post has comments
+  ✓  Check result commnets type
+  ✓  Check result commnets value
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Invalid Date Params
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,name&start_date=bla&end_date=bla [400 Bad Request, 876B, 253ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Unknown Company
+  GET https://unassigned-api.herokuapp.com/api//hello-world?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD [400 Bad Request, 823B, 504ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Invalid Date Range
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,name&start_date=2015-10-01T08:45:10.295Z&end_date=2015-09-01T19:37:12.193Z [400 Bad Request, 927B, 266ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Unknown Page Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,namme [400 Bad Request, 844B, 242ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Duplicate Company Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,name,name [400 Bad Request, 893B, 250ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Malformed Company Stats
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=id,,name&access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD [400 Bad Request, 850B, 241ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Malformed Posts Stats
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=posts{,,},category&access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD [400 Bad Request, 858B, 244ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Duplicate Posts Stat
+  GET https://unassigned-api.herokuapp.com/api//facebook?access_token=EAACEdEose0cBAGLZBVCbZBBSod1IcI3TCb9W3dLZASrct5Ir6NVir9jSRyx5yWfffMora82AVDC8cS8wTUm8zyIG2X3jBnSz007WZC8ZBoMbhLXELf2eOrjGZB40DY3LeMZCvtjkhG6Cr9dZBjDseMnhUWxToe3RPbkFmUDWSpKdcjDkyXj8Cy2wDT8SzgwTjajmQCRhrCYWVgZDZD&statistics=id,name,posts,posts,category,posts [400 Bad Request, 916B, 254ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Missing Access Token
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistic=bla [400 Bad Request, 614B, 252ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Invalid or Expired Access Token
+  GET https://unassigned-api.herokuapp.com/api//facebook?statistics=website,name&access_token=this-is-a-fake-access-token-or-equivalently-an-access-token-that-has-expired [400 Bad Request, 718B, 308ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Missing Endpoint 1
+  GET https://unassigned-api.herokuapp.com/ [400 Bad Request, 586B, 241ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+→ Missing Endpoint 2
+  GET https://unassigned-api.herokuapp.com/api [400 Bad Request, 586B, 249ms]
+  ✓  Status code is 400
+  ✓  Response time is acceptable
+  ✓  Content-type header is set
+  ✓  Content-type is application/json
+  ✓  Response has data
+  ✓  Response has empty data
+  ✓  Response has dev team
+  ✓  Check dev team
+  ✓  Response has version info
+  ✓  Response has start time
+  ✓  Response has end time
+  ✓  Response has elapsed time
+  ✓  Response has params
+  ✓  Check params
+  ✓  Response has status code
+  ✓  Check status code
+  ✓  Response has status text
+  ✓  Check status text
+
+┌─────────────────────────┬──────────┬──────────┐
+│                         │ executed │   failed │
+├─────────────────────────┼──────────┼──────────┤
+│              iterations │        1 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│                requests │       16 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│            test-scripts │       16 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│      prerequest-scripts │        0 │        0 │
+├─────────────────────────┼──────────┼──────────┤
+│              assertions │      353 │        0 │
+├─────────────────────────┴──────────┴──────────┤
+│ total run duration: 5.7s                      │
+├───────────────────────────────────────────────┤
+│ total data received: 16.71KB (approx)         │
+├───────────────────────────────────────────────┤
+│ average response time: 318ms                  │
+└───────────────────────────────────────────────┘

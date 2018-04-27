@@ -1,0 +1,34 @@
+#!/bin/sh
+#Written by Costa Paraskevopoulos in April 2018
+#Run test suite for the Facebook API
+
+if ! which newman 2>&1 > /dev/null
+then
+	printf "%s\n" "$0: missing dependency \`newman\`" >&2
+	exit 1
+fi
+
+tests='api-tests.json'
+config='Test-Env-Local.json' #run tests locally
+
+exec < /dev/tty
+printf "API key: "
+read -r key
+test -n "$key" || printf "\n\nUsing existing API key\n"
+
+printf "\n\nRunning test suite:\n\n"
+
+pgrep node && kill `pgrep node`
+{ npm start & } > /dev/null 2>&1
+
+#update api keys in both config files
+if test -n "$key"
+then
+	sed -i -r "0,/\"value\": \"\"*/s/\"value\": \".*/\"value\": \"$key\",/" Test-Env-Local.json
+	sed -i -r "0,/\"value\": \"\"*/s/\"value\": \".*/\"value\": \"$key\",/" Test-Env-Deploy.json
+fi
+
+newman run "$tests" -e "$config"
+pgrep node && kill `pgrep node`
+
+exit 0 #proceed with commit
