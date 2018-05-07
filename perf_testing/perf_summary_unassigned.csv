@@ -1,5 +1,0 @@
-"company","endpoint","num_ok","num_err","avg_resp_time"
-"APPLE","/apple?statistics=name,fan_count,description,website,posts{id,type,message,created_time,likes,comments}&start_date=2018-01-01&end_date=2018-02-01","10","0","4.5068386"
-"WOOLWORTHS","/woolworths?statistics=name,fan_count,description,website,posts{id,type,message,created_time,likes,comments}&start_date=2018-01-01&end_date=2018-02-01","10","0","5.927198899999999"
-"NVIDIA","/nvidia?statistics=name,fan_count,description,website,posts{id,type,message,created_time,likes,comments}&start_date=2018-01-01&end_date=2018-02-01","10","0","5.1141946"
-"ELECTRONIC ARTS","/ea?statistics=name,fan_count,description,website,posts{id,type,message,created_time,likes,comments}&start_date=2018-01-01&end_date=2018-02-01","10","0","4.8171895"
