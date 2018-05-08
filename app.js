@@ -10,6 +10,7 @@ var api = require('./routes/api')
 var api1 = require('./routes/api1')
 var api2 = require('./routes/api2')
 var api3 = require('./routes/api3')
+var api4 = require('./routes/api4')
 
 var app = express()
 
@@ -38,6 +39,7 @@ app.use('/api', api)
 app.use('/api/v1', api1)
 app.use('/api/v2', api2)
 app.use('/api/v3', api3)
+app.use('/api/v4', api4)
 
 /* catch 404 and forward to error handler */
 app.use(function (req, res, next) {
