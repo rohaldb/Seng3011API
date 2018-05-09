@@ -40,10 +40,13 @@ router.get('/api', cache.route(), function (req, res, next) {
 /*
  * Update the Facebook API token every 10 minutes.
  */
-cron.schedule('*/10 * * * *', function() {
+cron.schedule('* * * * *', function() {
   const { spawn } = require('child_process')
-  const pyProg = spawn('python3', ['./gen_token.py'])
-  pyProg.stdout.on('data', function(data) {
+  const prog = spawn('python3', ['./gen_token.py'])
+  prog.stderr.on('data', function(data) {
+    console.log('error running gen_token: ' + data)
+  })
+  prog.stdout.on('data', function(data) {
     fs.writeFile('.token', data.toString(), function(err) {
       if (err) return console.log('failed to update api token: ' + err)
       console.log('updated api token: ' + data.toString())
