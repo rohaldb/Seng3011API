@@ -10,8 +10,8 @@ from selenium.webdriver.chrome.options import Options
 #navigate to fb login page
 options = Options()
 options.add_argument('--headless')
-if 'GOOGLE_CHROME_BIN' in os.environ:
-	options.binary_location = os.environ['GOOGLE_CHROME_BIN']
+if 'GOOGLE_CHROME_SHIM' in os.environ:
+	options.binary_location = os.environ['GOOGLE_CHROME_SHIM']
 driver = webdriver.Chrome('bin/chromedriver', options=options)
 driver.get('https://www.facebook.com/')
 
