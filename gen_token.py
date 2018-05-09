@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 #navigate to fb login page
 options = Options()
 options.add_argument('--headless')
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome('bin/chromedriver', options=options)
 driver.get('https://www.facebook.com/')
 
 #warn of unset FB_PASSWD env var
