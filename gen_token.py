@@ -10,10 +10,10 @@ from selenium.webdriver.chrome.options import Options
 #navigate to fb login page
 options = Options()
 options.add_argument('--headless')
-driver.set_page_load_timeout(60)
 if 'GOOGLE_CHROME_SHIM' in os.environ:
 	options.binary_location = os.environ['GOOGLE_CHROME_SHIM']
 driver = webdriver.Chrome('bin/chromedriver', options=options)
+driver.set_page_load_timeout(60)
 driver.get('https://www.facebook.com/')
 
 #warn of unset FB_PASSWD env var
