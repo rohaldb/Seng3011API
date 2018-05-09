@@ -38,9 +38,12 @@ router.get('/api', cache.route(), function (req, res, next) {
 })
 
 /*
- * Update the Facebook API token every 10 minutes.
+ * Update the Facebook API token every 5 minutes.
+ * FB API token may expire within 10 minutes and
+ * key generations may fail on the deploy due to lack
+ * of memory, so 5 minutes is a reasonable balance.
  */
-cron.schedule('* * * * *', function() {
+cron.schedule('*/5 * * * *', function() {
   const { spawn } = require('child_process')
   const prog = spawn('python3', ['./gen_token.py'])
   prog.stderr.on('data', function(data) {
