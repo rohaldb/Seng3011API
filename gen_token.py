@@ -5,12 +5,12 @@
 import os
 from selenium import *
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 
 #navigate to fb login page
 options = Options()
 options.add_argument('--headless')
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Chrome(options=options)
 driver.get('https://www.facebook.com/')
 
 #provide credentials of placeholder fb account
