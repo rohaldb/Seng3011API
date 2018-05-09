@@ -2,7 +2,7 @@
 #Generate a Facebook Graph API token dynamically
 #Based largely on https://gist.github.com/ManrajGrover/ba1bd439d3d5a59feaaf
 
-import os
+import os, sys
 from selenium import *
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -12,6 +12,11 @@ options = Options()
 options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
 driver.get('https://www.facebook.com/')
+
+#warn of unset FB_PASSWD env var
+if not 'FB_PASSWD' in os.environ:
+	print('FB_PASSWD environment variable not set', file=sys.stderr)
+	sys.exit(1)
 
 #provide credentials of placeholder fb account
 email = driver.find_element_by_id('email')
