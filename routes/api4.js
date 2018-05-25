@@ -56,6 +56,10 @@ cron.schedule('*/5 * * * *', function() {
  * Update the Facebook API token in .token.
  */
 const genToken = (callback) => {
+  /* *************************************************************************** */
+  callback('success') /* silence token generator due to fb account being blocked */
+  /* *************************************************************************** */
+  /*
   const { spawn } = require('child_process')
   const prog = spawn('python3', ['./gen_token.py'])
   prog.stderr.on('data', function(data) {
@@ -69,6 +73,7 @@ const genToken = (callback) => {
       callback('success')
     })
   })
+  */
 }
 
 /*
