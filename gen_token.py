@@ -23,7 +23,7 @@ if not 'FB_PASSWD' in os.environ:
 
 #provide credentials of placeholder fb account
 email = driver.find_element_by_id('email')
-email.send_keys('event.stock2@gmail.com')
+email.send_keys('stock31179@gmail.com')
 passwd = driver.find_element_by_id('pass')
 passwd.send_keys(os.environ['FB_PASSWD'])
 
