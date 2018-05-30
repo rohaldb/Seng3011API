@@ -41,25 +41,9 @@ router.get('/api', cache.route(), function (req, res, next) {
 })
 
 /*
- * Update the Facebook API token every 5 minutes.
- * FB API token may expire within 10 minutes and
- * key generations may fail on the deploy due to lack
- * of memory, so 5 minutes is a reasonable balance.
- */
-cron.schedule('*/5 * * * *', function() {
-  genToken(function(err) {
-    console.log(err)
-  })
-})
-
-/*
  * Update the Facebook API token in .token.
  */
 const genToken = (callback) => {
-  /* *************************************************************************** */
-  callback('success') /* silence token generator due to fb account being blocked */
-  /* *************************************************************************** */
-  /*
   const { spawn } = require('child_process')
   const prog = spawn('python3', ['./gen_token.py'])
   prog.stderr.on('data', function(data) {
@@ -73,7 +57,6 @@ const genToken = (callback) => {
       callback('success')
     })
   })
-  */
 }
 
 /*
@@ -100,7 +83,9 @@ const getAccessToken = (req, res, callback) => {
     /* if server was in idle, .token may be expired, so regenerate first */
     var mtime = new Date(util.inspect(stats.mtime)).getTime() / 1000
     var now = new Date() / 1000
-    if (now - mtime > 800) {
+    /* generate a new token at most once every 25 minutes */
+    /* higher frequency may result in a blocked fb account */
+    if (now - mtime > 1500) {
       genToken(function(err) {
         fn(err)
       })
